@@ -1,0 +1,16 @@
+package com.antibas.math.function.trigonometrical;
+
+public class Cot extends Sin {
+	@Override
+	public Double apply(Double t) {
+//		if(phaseModifier == RADIANS) {
+//			return amplitude/Math.tan(frequency*t + phase)+adder;
+//		}
+		return amplitude/Math.tan(frequency*t + this.getPhase())+adder;
+	}
+	
+	@Override
+	public String toString(String var) {
+		return amplitude + "*cot(" + var + " + " + getPhase() +") + " + adder;
+	}
+}
