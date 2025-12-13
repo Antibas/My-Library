@@ -4,11 +4,10 @@ import com.antibas.math.Complex;
 import com.antibas.util.pair.Pair;
 
 import java.lang.reflect.Array;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Vector;
+import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+
 
 public final class ArrayUtils {
 	public static double[] toPrimitive(Double[] arr) {
@@ -482,4 +481,26 @@ public final class ArrayUtils {
 		}
 		return aa;
 	}
+
+	public static <T> List<T> merge(Collection<? extends Collection<? extends T>> collections) {
+		return collections.stream().flatMap(Collection::stream).collect(Collectors.toList());
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T> T[] merge(T[][] arrays) {
+		List<T> ret = new ArrayList<>();
+		for(T[] a: arrays) {
+            ret.addAll(Arrays.asList(a));
+		}
+		return ret.toArray((T[]) Array.newInstance(arrays[0].getClass().getComponentType(), ret.size()));
+	}
+
+//	@SuppressWarnings("unchecked")
+//	public static int[] merge(int[][] arrays) {
+//		int[] aa = new int[a.length];
+//		for(int i = 0; i < aa.length; i++) {
+//			aa[i] = (a[i] - min)/l;
+//		}
+//		return aa;
+//	}
 }
