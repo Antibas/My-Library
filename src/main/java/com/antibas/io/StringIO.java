@@ -41,15 +41,15 @@ public abstract class StringIO {
         String a = "";
         L.fill(0);
         
-        for(int i = 1; i < L.rows(); i++){
-            for(int j = 1; j < L.columns(); j++){
+        for(int i = 1; i < L.getRows(); i++){
+            for(int j = 1; j < L.getColumns(); j++){
                 if(a1[i-1] == a2[j-1]) L.set(i, j, L.elementAt(i-1, j-1) + 1);
                 else L.set(i, j, Math.max(L.elementAt(i-1, j),L.elementAt(i, j-1)));
             }
         }
         int m = 0;
-        for(int i = 1; i < L.rows(); i++){
-            for(int j = 1; j < L.columns(); j++){
+        for(int i = 1; i < L.getRows(); i++){
+            for(int j = 1; j < L.getColumns(); j++){
                 if((int)L.elementAt(i, j) > m && a1[i-1] == a2[j-1]){
                     a += a1[i-1];
                     m = (int) L.elementAt(i, j);

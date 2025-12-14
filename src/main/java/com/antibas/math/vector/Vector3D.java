@@ -1,8 +1,13 @@
 package com.antibas.math.vector;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Setter
+@Getter
 public class Vector3D extends Vector2D {
 	protected double z1;
 	protected double z2;
@@ -41,23 +46,7 @@ public class Vector3D extends Vector2D {
 		this(vector, 0, 0);
 	}
 
-	public double getZ1() {
-		return z1;
-	}
-
-	public void setZ1(double z1) {
-		this.z1 = z1;
-	}
-
-	public double getZ2() {
-		return z2;
-	}
-
-	public void setZ2(double z2) {
-		this.z2 = z2;
-	}
-
-	public double getZ() {
+    public double getZ() {
 		return z2-z1;
 	}
 	

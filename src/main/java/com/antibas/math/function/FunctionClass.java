@@ -2,32 +2,14 @@ package com.antibas.math.function;
 
 // Remove Lombok annotations and generate getters/setters manually
 import com.antibas.math.Number2;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public abstract class FunctionClass implements Function{
-    public double getAmplitude() {
-        return amplitude;
-    }
 
-    public void setAmplitude(double amplitude) {
-        this.amplitude = amplitude;
-    }
-
-    public double getAdder() {
-        return adder;
-    }
-
-    public void setAdder(double adder) {
-        this.adder = adder;
-    }
-
-    public Domain getDomain() {
-        return domain;
-    }
-
-    public void setDomain(Domain domain) {
-        this.domain = domain;
-    }
-	protected double amplitude;
+    protected double amplitude;
 	protected double adder;
 	protected Domain domain;
 	

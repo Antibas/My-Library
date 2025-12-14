@@ -2,12 +2,16 @@ package com.antibas.math.function.trigonometrical;
 
 import com.antibas.math.Math2;
 import com.antibas.math.function.FunctionClass;
+import lombok.Getter;
+import lombok.Setter;
 
 import static com.antibas.math.function.trigonometrical.PhaseModifier.*;
 
 public class Sin extends FunctionClass{
     protected double amplitude;
     protected double adder;
+    @Setter
+    @Getter
     protected double frequency;
 	private double phase;
 	public static PhaseModifier phaseModifier = RADIANS;
@@ -34,15 +38,7 @@ public class Sin extends FunctionClass{
 		this(1.0d, 1.0d, 0.0d);
 	}
 
-	public double getFrequency() {
-		return frequency;
-	}
-
-	public void setFrequency(double frequency) {
-		this.frequency = frequency;
-	}
-
-	public double getPhase() {
+    public double getPhase() {
 //		if(phaseModifier == DEGREES) {
 //			return 180.0d*phase/Math2.PI;
 //		}

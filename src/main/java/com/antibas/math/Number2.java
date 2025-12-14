@@ -2,6 +2,7 @@ package com.antibas.math;
 
 import com.antibas.math.function.Domain;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public abstract class Number2 extends Number implements Serializable{
@@ -9,6 +10,7 @@ public abstract class Number2 extends Number implements Serializable{
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 3519438330121793034L;
 	public static final double DX_DOUBLE = Double.MIN_NORMAL;
 	public static final double DX_INT = 1;

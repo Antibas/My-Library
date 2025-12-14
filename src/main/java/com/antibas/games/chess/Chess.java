@@ -116,8 +116,8 @@ public class Chess {
 		}
 		//TODO check pawns
 		
-		for(int i = 0; i < moves.rows(); i++) {
-			for(int j = 0; j < moves.columns(); j++) {
+		for(int i = 0; i < moves.getRows(); i++) {
+			for(int j = 0; j < moves.getColumns(); j++) {
 				if(moves.elementAt(i, j) == 1.0 && this.blocks[i][j].getPiece() != null) {
 					if(piece.getColor() == this.blocks[i][j].getPiece().getColor()) {
 						moves.set(i, j, 0.0);

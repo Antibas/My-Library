@@ -1,7 +1,12 @@
 package com.antibas.util.graph;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serial;
 
+@Setter
+@Getter
 public class DirectedEdge extends Edge {
 	/**
 	 * 
@@ -29,11 +34,4 @@ public class DirectedEdge extends Edge {
 		return super.toString() + ": " + direction.toString().toLowerCase();
 	}
 
-	public Direction getDirection() {
-		return direction;
-	}
-
-	public void setDirection(Direction direction) {
-		this.direction = direction;
-	}
 }

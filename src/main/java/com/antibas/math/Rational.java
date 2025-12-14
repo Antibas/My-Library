@@ -1,6 +1,9 @@
 package com.antibas.math;
 
 
+import lombok.Getter;
+
+@Getter
 public class Rational extends Number2 {
 
 	/**
@@ -23,23 +26,15 @@ public class Rational extends Number2 {
 	public Rational(int numerator) {
 		this(numerator, 1);
 	}
-	
-	public int getNumerator() {
-		return numerator;
-	}
 
-	public void setNumerator(int numerator) {
+    public void setNumerator(int numerator) {
 		if(numerator < 0) {
 			throw new IllegalArgumentException();
 		}
 		this.numerator = numerator;
 	}
 
-	public int getDenominator() {
-		return denominator;
-	}
-
-	public void setDenominator(int denominator) {
+    public void setDenominator(int denominator) {
 		if(denominator <= 0) {
 			throw new IllegalArgumentException();
 		}

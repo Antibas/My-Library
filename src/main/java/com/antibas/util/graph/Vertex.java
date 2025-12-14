@@ -2,9 +2,13 @@ package com.antibas.util.graph;
 
 
 import com.antibas.util.Nameable;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
 
+@Setter
+@Getter
 public class Vertex implements Nameable, Comparable<Vertex>{
 	/**
 	 * 
@@ -32,32 +36,6 @@ public class Vertex implements Nameable, Comparable<Vertex>{
 			this.name = name;
 			this.cost = 0;
 		}
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public boolean isExplored() {
-		return isExplored;
-	}
-
-	public void setExplored(boolean explored) {
-		isExplored = explored;
-	}
-
-	public double getCost() {
-		return cost;
-	}
-
-	public void setCost(double cost) {
-		this.cost = cost;
 	}
 
 	public void reset() {

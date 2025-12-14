@@ -1,5 +1,6 @@
 package com.antibas;
-import com.antibas.math.Math2;
+import com.antibas.parser.query.QueryParser;
+import com.antibas.parser.query.QueryState;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -7,9 +8,18 @@ public class Main {
     public static void main(String[] args) {
 //		  Complex c = new Complex(1,2);
 //		  System.out.println(c);
-        for(int i = 0; i < 100; i++) {
-            System.out.println(Math2.recaman(i));
-        }
+//        for(int i = 0; i < 100; i++) {
+//            System.out.println(Math2.recaman(i));
+//        }
+        QueryState[][] grammar = {
+            {QueryState.STRING_LITERAL},
+            {QueryState.PARENTHESIS_OPEN, QueryState.EXPRESSION, QueryState.PARENTHESIS_CLOSE},
+            {QueryState.STRING_LITERAL, QueryState.BOOLEAN_OPERATOR, QueryState.STRING_LITERAL},
+            {QueryState.EXPRESSION, QueryState.BOOLEAN_OPERATOR, QueryState.EXPRESSION},
+            {QueryState.STRING_LITERAL, QueryState.BOOLEAN_OPERATOR, QueryState.EXPRESSION},
+            {QueryState.EXPRESSION, QueryState.BOOLEAN_OPERATOR, QueryState.STRING_LITERAL}
+        };
+        System.out.println(new QueryParser().compile("\"Interpretable\" OR \"Interpretability\""));
 		  /*
 		  Graph<Vertex, Edge> G = new Graph<>();
 		  Vertex A = new Vertex("A");

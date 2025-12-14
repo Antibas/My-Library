@@ -2,7 +2,11 @@ package com.antibas.math.function.logarithmic;
 
 import com.antibas.math.Number2;
 import com.antibas.math.function.FunctionClass;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class Log extends FunctionClass{
 	protected double base;
 	
@@ -20,15 +24,7 @@ public class Log extends FunctionClass{
 		this(base, 1.0d, 0.0d);
 	}
 
-	public double getBase() {
-		return base;
-	}
-
-	public void setBase(double base) {
-		this.base = base;
-	}
-
-	@Override
+    @Override
 	public Double apply(Double t) {
 		return amplitude*Math.log10(t)/Math.log10(base) + adder;
 	}

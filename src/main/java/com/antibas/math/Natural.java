@@ -1,5 +1,8 @@
 package com.antibas.math;
 
+import lombok.Getter;
+
+@Getter
 public final class Natural extends Number2 {
 	
 	/**
@@ -21,12 +24,8 @@ public final class Natural extends Number2 {
 		this(value.intValue());
 	}
 
-	public long getValue() {
-		return value;
-	}
 
-
-	public void setValue(int value) {
+    public void setValue(int value) {
 		if(value < 0) throw new IllegalArgumentException();
 		this.value = value;
 	}

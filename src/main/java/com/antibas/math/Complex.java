@@ -1,9 +1,14 @@
 package com.antibas.math;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Comparator;
 
+@Setter
+@Getter
 public final class Complex extends Number2 implements Comparator<Complex>, Comparable<Complex>, Serializable{
 	public static final Complex MAX_VALUE = new Complex(Double.MAX_VALUE, Double.MAX_VALUE);
 	public static final Complex MIN_VALUE = new Complex(Double.MIN_VALUE, Double.MIN_VALUE);
@@ -27,23 +32,7 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 		this.imaginary = imaginary;
 	}
 
-	public double getReal() {
-		return real;
-	}
-
-	public void setReal(double real) {
-		this.real = real;
-	}
-
-	public double getImaginary() {
-		return imaginary;
-	}
-
-	public void setImaginary(double imaginary) {
-		this.imaginary = imaginary;
-	}
-
-	public Complex(double real) {
+    public Complex(double real) {
 		this(real, 0.0d);
 	}
 	

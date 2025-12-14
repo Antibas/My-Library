@@ -3,49 +3,22 @@ package com.antibas.math.function;
 import com.antibas.math.Complex;
 import com.antibas.math.Math2;
 import com.antibas.math.Number2;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
 public class Domain {
-    public double getDx() {
-        return dx;
-    }
 
-    public double getStart() {
-        return start;
-    }
-
-    public double getEnd() {
-        return end;
-    }
-
-    public boolean isClosedStart() {
-        return closedStart;
-    }
-
-    public boolean isClosedEnd() {
-        return closedEnd;
-    }
-
-    public Domain getNext() {
-        return next;
-    }
+    @Setter
     private double dx;
 	private double start;
 	private double end;
+    @Setter
     private boolean closedStart;
+    @Setter
     private boolean closedEnd;
 
-    public void setDx(double dx) {
-        this.dx = dx;
-    }
-
-    public void setClosedStart(boolean closedStart) {
-        this.closedStart = closedStart;
-    }
-
-    public void setClosedEnd(boolean closedEnd) {
-        this.closedEnd = closedEnd;
-    }
-	private Domain next;
+    private Domain next;
 	
 	public Domain(double start, double end, double dx, boolean closedStart, boolean closedEnd) {
 		if(start >= end) {

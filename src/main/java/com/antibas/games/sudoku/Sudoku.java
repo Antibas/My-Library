@@ -43,7 +43,7 @@ public class Sudoku {
 	}
 
 	public int size() {
-		return grid.rows();
+		return grid.getRows();
 	}
 	
 	public void randomize(int zeros) {

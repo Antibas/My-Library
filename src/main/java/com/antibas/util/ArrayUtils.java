@@ -106,11 +106,7 @@ public final class ArrayUtils {
   }
 	
 	public static int[] zerosInt(int n) {
-		int[] z = new int[n];
-		for(int i = 0; i < n; i++) {
-			z[i] = 0;
-		}
-		return z;
+        return new int[n];
 	}
 	
 	public static int[][] zerosInt(int n, int m) {
@@ -124,11 +120,7 @@ public final class ArrayUtils {
 	}
 	
 	public static byte[] zerosByte(int n) {
-		byte[] z = new byte[n];
-		for(int i = 0; i < n; i++) {
-			z[i] = 0;
-		}
-		return z;
+        return new byte[n];
 	}
 	
 	public static byte[][] zerosByte(int n, int m) {
@@ -496,11 +488,101 @@ public final class ArrayUtils {
 	}
 
 //	@SuppressWarnings("unchecked")
-//	public static int[] merge(int[][] arrays) {
-//		int[] aa = new int[a.length];
-//		for(int i = 0; i < aa.length; i++) {
-//			aa[i] = (a[i] - min)/l;
-//		}
-//		return aa;
-//	}
+	public static int[] merge(int[][] arrays) {
+		int size = 0;
+		for(int[] a: arrays) {
+			size += a.length;
+		}
+		int[] ret = new int[size];
+		for(int i = 0, j = 0; i < arrays.length; i++) {
+			for(int a: arrays[i]) {
+				ret[j++] = a;
+			}
+		}
+		return ret;
+	}
+
+	public static float[] merge(float[][] arrays) {
+		int size = 0;
+		for(float[] a: arrays) {
+			size += a.length;
+		}
+		float[] ret = new float[size];
+		for(int i = 0, j = 0; i < arrays.length; i++) {
+			for(float a: arrays[i]) {
+				ret[j++] = a;
+			}
+		}
+		return ret;
+	}
+
+	public static double[] merge(double[][] arrays) {
+		int size = 0;
+		for(double[] a: arrays) {
+			size += a.length;
+		}
+		double[] ret = new double[size];
+		for(int i = 0, j = 0; i < arrays.length; i++) {
+			for(double a: arrays[i]) {
+				ret[j++] = a;
+			}
+		}
+		return ret;
+	}
+
+	public static long[] merge(long[][] arrays) {
+		int size = 0;
+		for(long[] a: arrays) {
+			size += a.length;
+		}
+		long[] ret = new long[size];
+		for(int i = 0, j = 0; i < arrays.length; i++) {
+			for(long a: arrays[i]) {
+				ret[j++] = a;
+			}
+		}
+		return ret;
+	}
+
+	public static char[] merge(char[][] arrays) {
+		int size = 0;
+		for(char[] a: arrays) {
+			size += a.length;
+		}
+		char[] ret = new char[size];
+		for(int i = 0, j = 0; i < arrays.length; i++) {
+			for(char a: arrays[i]) {
+				ret[j++] = a;
+			}
+		}
+		return ret;
+	}
+
+	public static byte[] merge(byte[][] arrays) {
+		int size = 0;
+		for(byte[] a: arrays) {
+			size += a.length;
+		}
+		byte[] ret = new byte[size];
+		for(int i = 0, j = 0; i < arrays.length; i++) {
+			for(byte a: arrays[i]) {
+				ret[j++] = a;
+			}
+		}
+		return ret;
+	}
+
+	public static boolean[] merge(boolean[][] arrays) {
+		int size = 0;
+		for(boolean[] a: arrays) {
+			size += a.length;
+		}
+		boolean[] ret = new boolean[size];
+		for(int i = 0, j = 0; i < arrays.length; i++) {
+			for(boolean a: arrays[i]) {
+				ret[j++] = a;
+			}
+		}
+		return ret;
+	}
 }

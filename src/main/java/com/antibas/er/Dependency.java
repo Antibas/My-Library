@@ -1,8 +1,13 @@
 package com.antibas.er;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.HashSet;
 import java.util.Set;
 
+@Getter
+@Setter
 public class Dependency {
 	private Set<Feature> rightSide;
 	private Set<Feature> leftSide;
@@ -17,23 +22,7 @@ public class Dependency {
 		this.leftSide = new HashSet<>();
 	}
 
-	public Set<Feature> getRightSide() {
-		return rightSide;
-	}
-
-	public void setRightSide(Set<Feature> rightSide) {
-		this.rightSide = rightSide;
-	}
-
-	public Set<Feature> getLeftSide() {
-		return leftSide;
-	}
-
-	public void setLeftSide(Set<Feature> leftSide) {
-		this.leftSide = leftSide;
-	}
-
-	@Override
+    @Override
 	public String toString() {
 		return rightSide.toString() + " --> " + leftSide.toString();
 	}

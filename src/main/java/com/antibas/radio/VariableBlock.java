@@ -1,7 +1,10 @@
 package com.antibas.radio;
 
+import lombok.Getter;
+
 import java.io.Serial;
 
+@Getter
 public class VariableBlock<T> extends RadioBlock {
 	/**
 	 * 

@@ -102,8 +102,8 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     public Matrix(int rows, int columns, double... a){
     	this(rows, columns);
         int i = 0;
-    	for(int r = 0; r < this.rows(); r++){ 
-            for(int c = 0; c < this.columns(); c++){
+    	for(int r = 0; r < this.getRows(); r++){
+            for(int c = 0; c < this.getColumns(); c++){
             	if(i >= a.length) {
             		elements[r][c] = defaultValue;
             	} else {
@@ -191,7 +191,7 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      * 
      * @return
      */
-    public int rows() {
+    public int getRows() {
     	if(elements == null) {
     		return 0;
     	}
@@ -202,7 +202,7 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      * 
      * @return
      */
-    public int columns() {
+    public int getColumns() {
     	if(elements == null) {
     		return 0;
     	}
@@ -226,9 +226,9 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
 
     private void validate(int r, int c, boolean checkEmpty) {
         if(isEmpty() && checkEmpty) throw new EmptyMatrixException();
-        if((r>rows() || r<0) && (c>columns() || c<0)) throw new IndexOutOfBoundsException("Indices " + r + " and " + c + " are invalid for size " + rows() + "X" + columns());
-        if(r>rows() || r<0) throw new IndexOutOfBoundsException("Index " + r + " is invalid for row size " + rows());
-        if(c>columns() || c<0) throw new IndexOutOfBoundsException("Index " + c + " is invalid for column size " + columns());
+        if((r> getRows() || r<0) && (c> getColumns() || c<0)) throw new IndexOutOfBoundsException("Indices " + r + " and " + c + " are invalid for size " + getRows() + "X" + getColumns());
+        if(r> getRows() || r<0) throw new IndexOutOfBoundsException("Index " + r + " is invalid for row size " + getRows());
+        if(c> getColumns() || c<0) throw new IndexOutOfBoundsException("Index " + c + " is invalid for column size " + getColumns());
     }
 
     /**
@@ -236,7 +236,7 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      * @return
      */
     public boolean isOrthogonial(){
-        return rows() == columns();
+        return getRows() == getColumns();
     }
     
     /**
@@ -252,7 +252,7 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      * @return
      */
     public boolean isSingle() {
-        return rows() == 1 && columns() == 1;
+        return getRows() == 1 && getColumns() == 1;
     }
     
     /**
@@ -262,9 +262,9 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      */
     public boolean isMirrored() throws EmptyMatrixException{
         if(isEmpty()) throw new EmptyMatrixException();
-        for(int r = 0; r < rows(); r++){ 
-            for(int c = 0; c < columns(); c++){
-                if(elements[r][c] != elements[rows()-r-1][columns()-c-1]) return false;
+        for(int r = 0; r < getRows(); r++){
+            for(int c = 0; c < getColumns(); c++){
+                if(elements[r][c] != elements[getRows()-r-1][getColumns()-c-1]) return false;
             }
         } 
         return true;
@@ -274,9 +274,9 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     public boolean equals(Object o){
         if(o instanceof Matrix) {
 	        Matrix O = (Matrix)o;
-	        if(rows() != O.rows() || columns() != O.columns()) return false;
-	        for(int r = 0; r < rows(); r++){ 
-	            for(int c = 0; c < columns(); c++){
+	        if(getRows() != O.getRows() || getColumns() != O.getColumns()) return false;
+	        for(int r = 0; r < getRows(); r++){
+	            for(int c = 0; c < getColumns(); c++){
 	                if(!Objects.equals(elements[r][c], O.elements[r][c])) return false;
 	            }
 	        }
@@ -285,8 +285,8 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
         
         if(o instanceof Double) {
         	Double O = (Double)o;
-	        for(int r = 0; r < rows(); r++){ 
-	            for(int c = 0; c < columns(); c++){
+	        for(int r = 0; r < getRows(); r++){
+	            for(int c = 0; c < getColumns(); c++){
 	                if(elements[r][c] != O) return false;
 	            }
 	        }
@@ -299,8 +299,8 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 67 * hash + this.rows();
-        hash = 67 * hash + this.columns();
+        hash = 67 * hash + this.getRows();
+        hash = 67 * hash + this.getColumns();
         return hash;
     }
     
@@ -308,14 +308,14 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     public String toString(){
         if(isEmpty()) return "[]";
         String ret = "";
-        for(int r = 0; r < rows(); r++){
+        for(int r = 0; r < getRows(); r++){
             if(r == 0) ret += "[[";
             else ret += " [";
-            for(int c = 0; c < columns(); c++){
+            for(int c = 0; c < getColumns(); c++){
                 ret += elements[r][c];
-                if(c != columns()-1) ret += "  ";
+                if(c != getColumns()-1) ret += "  ";
             }
-            if(r == rows()-1) ret += "]]";
+            if(r == getRows()-1) ret += "]]";
             else ret += "],\n";
         }
         return ret;
@@ -354,14 +354,14 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     		return;
     	}
     	
-    	if(row.length > this.columns()) {
-    		throw new ArrayIndexOutOfBoundsException("Array of size " + row.length + " cannot be added to a matrix with column size " + columns());
+    	if(row.length > this.getColumns()) {
+    		throw new ArrayIndexOutOfBoundsException("Array of size " + row.length + " cannot be added to a matrix with column size " + getColumns());
     	}
     	double[][] tmp = this.elements;
-    	this.elements = new double[this.rows()+1][this.columns()];
+    	this.elements = new double[this.getRows()+1][this.getColumns()];
     	
     	System.arraycopy(tmp, 0, this.elements, 0, tmp.length);
-    	System.arraycopy(row, 0, this.elements[rows()-1], 0, row.length);
+    	System.arraycopy(row, 0, this.elements[getRows()-1], 0, row.length);
     }
     
     /**
@@ -370,13 +370,13 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      * @return
      */
     public Matrix excludeRow(int row) {
-    	if(row>=rows() || row<0) throw new IndexOutOfBoundsException("Index " + row + " is invalid for row size " + rows());
+    	if(row>= getRows() || row<0) throw new IndexOutOfBoundsException("Index " + row + " is invalid for row size " + getRows());
     	
     	
-    	Matrix m = new Matrix(this.rows()-1, this.columns());
+    	Matrix m = new Matrix(this.getRows()-1, this.getColumns());
     	
     	int j = 0;
-    	for(int i = 0; i < this.rows(); i++) {
+    	for(int i = 0; i < this.getRows(); i++) {
     		if(i == row) {
     			continue;
     		}
@@ -401,20 +401,20 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     		return;
     	}
     	
-    	if(column.length > this.rows()) {
-    		throw new ArrayIndexOutOfBoundsException("Array of size " + column.length + " cannot be added to a matrix with row size " + rows());
+    	if(column.length > this.getRows()) {
+    		throw new ArrayIndexOutOfBoundsException("Array of size " + column.length + " cannot be added to a matrix with row size " + getRows());
     	}
     	
     	double[][] tmp = this.elements;
-    	this.elements = new double[this.rows()][this.columns()+1];
+    	this.elements = new double[this.getRows()][this.getColumns()+1];
     	
     	int a = 0;
     	for(int i = 0; i < tmp.length; i++) {
     		System.arraycopy(tmp[i], 0, this.elements[i], 0, tmp[i].length);
     		if(a < column.length) {
-    			this.elements[i][columns()-1] = column[a++];
+    			this.elements[i][getColumns()-1] = column[a++];
     		} else {
-    			this.elements[i][columns()-1] = defaultValue;
+    			this.elements[i][getColumns()-1] = defaultValue;
     		}
     	}
     	
@@ -426,7 +426,7 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      * @return
      */
     public Matrix excludeColumn(int column) {
-    	if(column>=columns() || column<0) throw new IndexOutOfBoundsException("Index " + column + " is invalid for column size " + columns());
+    	if(column>= getColumns() || column<0) throw new IndexOutOfBoundsException("Index " + column + " is invalid for column size " + getColumns());
     	
     	Matrix m = this.T();
     	return m.excludeRow(column).T();
@@ -437,9 +437,9 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      * @return
      */
     public Matrix T(){
-        Matrix AT = new Matrix(columns(), rows());
-        for (int r = 0; r < columns(); r++){
-            for (int c = 0; c < rows(); c++) {
+        Matrix AT = new Matrix(getColumns(), getRows());
+        for (int r = 0; r < getColumns(); r++){
+            for (int c = 0; c < getRows(); c++) {
                 AT.set(r, c, elements[c][r]);
             }
         }
@@ -464,7 +464,7 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     public Matrix flipHorizontally() {
     	if(isEmpty()) throw new EmptyMatrixException();
     	Matrix A = new Matrix(this);
-    	for (int r = 0; r < columns(); r++){
+    	for (int r = 0; r < getColumns(); r++){
     		A.elements[r] = ArrayUtils.reverse(A.elements[r]);
     	}
     	return A;
@@ -548,8 +548,8 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      * @param cc
      */
     public void forEach(Function<Double, Double> cc){
-        for(int r = 0; r < rows(); r++){ 
-            for(int c = 0; c < columns(); c++){
+        for(int r = 0; r < getRows(); r++){
+            for(int c = 0; c < getColumns(); c++){
                 elements[r][c] = cc.apply(elements[r][c]);
             }
         }
@@ -557,8 +557,8 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
 
     public void forEach(TriConsumer<Integer, Integer, Double> action) {
         if (isEmpty()) return;
-        for (int r = 0; r < rows(); r++) {
-            for (int c = 0; c < columns(); c++) {
+        for (int r = 0; r < getRows(); r++) {
+            for (int c = 0; c < getColumns(); c++) {
                 double value = elementAt(r, c);
                 action.accept(r, c, value);
             }
@@ -577,9 +577,9 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      */
     public double[][] toPrimitiveArray() throws EmptyMatrixException{
         if(isEmpty()) return null;
-        double[][] ret = new double[rows()][columns()];
-        for(int r = 0; r < rows(); r++){ 
-            System.arraycopy(elements[r], 0, ret[r], 0, columns());
+        double[][] ret = new double[getRows()][getColumns()];
+        for(int r = 0; r < getRows(); r++){
+            System.arraycopy(elements[r], 0, ret[r], 0, getColumns());
         }
         return ret;
     }
@@ -635,10 +635,10 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      */
     public double rowSum(int r){
     	if(isEmpty()) throw new EmptyMatrixException();
-        if(r>rows()) throw new IndexOutOfBoundsException();
+        if(r> getRows()) throw new IndexOutOfBoundsException();
         if(r<0) throw new IllegalArgumentException();
         double S = 0;
-        for(int c = 0; c < columns(); c++)
+        for(int c = 0; c < getColumns(); c++)
             S += elements[r][c];
         return S;
     }
@@ -650,10 +650,10 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      */
     public double columnSum(int c){
     	if(isEmpty()) throw new EmptyMatrixException();
-        if(c>columns()) throw new IndexOutOfBoundsException();
+        if(c> getColumns()) throw new IndexOutOfBoundsException();
         if(c<0) throw new IllegalArgumentException();
         double S = 0;
-        for(int r = 0; r < rows(); r++)
+        for(int r = 0; r < getRows(); r++)
             S += elements[r][c];
         return S;
     }
@@ -665,9 +665,9 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      */
     public boolean isZeroRow(int r){
     	if(isEmpty()) throw new EmptyMatrixException();
-        if(r>=rows()) throw new IndexOutOfBoundsException();
+        if(r>= getRows()) throw new IndexOutOfBoundsException();
         if(r<0) throw new IllegalArgumentException();
-        for(int c = 0; c < columns(); c++)
+        for(int c = 0; c < getColumns(); c++)
             if(elements[r][c] != 0.0) return false;
         return true;
     }
@@ -679,9 +679,9 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      */
     public boolean isZeroColumn(int c){
     	if(isEmpty()) throw new EmptyMatrixException();
-        if(c>=columns()) throw new IndexOutOfBoundsException();
+        if(c>= getColumns()) throw new IndexOutOfBoundsException();
         if(c<0) throw new IllegalArgumentException();
-        for(int r = 0; r < rows(); r++)
+        for(int r = 0; r < getRows(); r++)
             if(elements[r][c] != 0.0) return false;
         return true;
     }
@@ -695,7 +695,7 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     	if(isEmpty()) throw new EmptyMatrixException();
         if(!isOrthogonial()) throw new NoOrthogonialMatrixException();
         double S = 0;
-        for(int rc = 0; rc < rows(); rc++){
+        for(int rc = 0; rc < getRows(); rc++){
             S += elements[rc][rc];
         }
         /*for(int r = 0; r < rows; r++){ 
@@ -746,11 +746,11 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     	if(isEmpty()) throw new EmptyMatrixException();
         if (!isOrthogonial()) throw new NoOrthogonialMatrixException();
         if (isSingle()) throw new CannotOperateException(); 
-        if (rows() == 2 && columns() == 2) return elements[0][0]*elements[1][1] - elements[0][1]*elements[1][0];
+        if (getRows() == 2 && getColumns() == 2) return elements[0][0]*elements[1][1] - elements[0][1]*elements[1][0];
         //return submatrix(Math2.RNG(1, rows), Math2.RNG(1, columns)).det();
         double S = 0;
         Matrix sub;
-        for(int i = 0; i < rows(); i++){
+        for(int i = 0; i < getRows(); i++){
             sub = submatrix(i, 0);
             //S += (-1)^(i-1)*elements[i][0]*sub.det();
             S += Math.pow(-1.0d, (double)i-1.0d)*elements[i][0]*sub.det();
@@ -841,8 +841,8 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     public double max(){
     	if(isEmpty()) throw new EmptyMatrixException();
         double m = 0;
-        for(int r = 0; r < rows(); r++){ 
-            for(int c = 0; c < columns(); c++){
+        for(int r = 0; r < getRows(); r++){
+            for(int c = 0; c < getColumns(); c++){
                 if(elements[r][c] > m) m = elements[r][c];
             }
         }
@@ -852,8 +852,8 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     public double min(){
     	if(isEmpty()) throw new EmptyMatrixException();
     	double m = 0;
-        for(int r = 0; r < rows(); r++){ 
-            for(int c = 0; c < columns(); c++){
+        for(int r = 0; r < getRows(); r++){
+            for(int c = 0; c < getColumns(); c++){
                 if(elements[r][c] < m) m = elements[r][c];
             }
         }
@@ -916,10 +916,10 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      */
     public static Matrix addMatrixes(Matrix A, Matrix B) throws CannotOperateException{
     	if(A.isEmpty() || B.isEmpty()) throw new EmptyMatrixException();
-    	if(A.rows() != B.rows() || A.columns() != B.columns()) throw new CannotOperateException();
-        Matrix R = new Matrix(A.rows(), A.columns());
-        for(int r = 0; r < R.rows(); r++){ 
-            for(int c = 0; c < R.columns(); c++){
+    	if(A.getRows() != B.getRows() || A.getColumns() != B.getColumns()) throw new CannotOperateException();
+        Matrix R = new Matrix(A.getRows(), A.getColumns());
+        for(int r = 0; r < R.getRows(); r++){
+            for(int c = 0; c < R.getColumns(); c++){
                 R.elements[r][c] = A.elementAt(r, c) + B.elementAt(r, c);
             }
         }
@@ -935,10 +935,10 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      */
     public static Matrix substractMatrixes(Matrix A, Matrix B) throws CannotOperateException{
     	if(A.isEmpty() || B.isEmpty()) throw new EmptyMatrixException();
-    	if(A.rows() != B.rows() || A.columns() != B.columns()) throw new CannotOperateException();
-        Matrix R = new Matrix(A.rows(), A.columns());
-        for(int r = 0; r < R.rows(); r++){ 
-            for(int c = 0; c < R.columns(); c++){
+    	if(A.getRows() != B.getRows() || A.getColumns() != B.getColumns()) throw new CannotOperateException();
+        Matrix R = new Matrix(A.getRows(), A.getColumns());
+        for(int r = 0; r < R.getRows(); r++){
+            for(int c = 0; c < R.getColumns(); c++){
                 R.elements[r][c] = A.elementAt(r, c) - B.elementAt(r, c);
             }
         }
@@ -947,10 +947,10 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     
     public static Matrix multiplyDotMatrixes(Matrix A, Matrix B) throws CannotOperateException{
     	if(A.isEmpty() || B.isEmpty()) throw new EmptyMatrixException();
-    	if(A.rows() != B.rows() || A.columns() != B.columns()) throw new CannotOperateException();
-        Matrix R = new Matrix(A.rows(), A.columns());
-        for(int r = 0; r < R.rows(); r++){ 
-            for(int c = 0; c < R.columns(); c++){
+    	if(A.getRows() != B.getRows() || A.getColumns() != B.getColumns()) throw new CannotOperateException();
+        Matrix R = new Matrix(A.getRows(), A.getColumns());
+        for(int r = 0; r < R.getRows(); r++){
+            for(int c = 0; c < R.getColumns(); c++){
                 R.elements[r][c] = A.elementAt(r, c) * B.elementAt(r, c);
             }
         }
@@ -966,12 +966,12 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      */
     public static Matrix multiplyMatrixes(Matrix A, Matrix B) throws CannotOperateException{
     	if(A.isEmpty() || B.isEmpty()) throw new EmptyMatrixException();
-    	if(A.columns() != B.rows()) throw new CannotOperateException();
+    	if(A.getColumns() != B.getRows()) throw new CannotOperateException();
         Matrix BT = (Matrix) B.T();
-        Matrix R = new Matrix(A.rows(), B.columns());
+        Matrix R = new Matrix(A.getRows(), B.getColumns());
         //R.fill(0);
-        for(int r = 0; r < R.rows(); r++){ 
-            for(int c = 0; c < R.columns(); c++){
+        for(int r = 0; r < R.getRows(); r++){
+            for(int c = 0; c < R.getColumns(); c++){
             	double S = 0;
                 for(double a: A.elements[r]) 
                     for(double b: BT.elements[c]) 
@@ -993,10 +993,10 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     
     public static Matrix divideMatrixes(Matrix A, Matrix B) throws CannotOperateException{
     	if(A.isEmpty() || B.isEmpty()) throw new EmptyMatrixException();
-    	if(A.rows() != B.rows() || A.columns() != B.columns()) throw new CannotOperateException();
-        Matrix R = new Matrix(A.rows(), A.columns());
-        for(int r = 0; r < R.rows(); r++){ 
-            for(int c = 0; c < R.columns(); c++){
+    	if(A.getRows() != B.getRows() || A.getColumns() != B.getColumns()) throw new CannotOperateException();
+        Matrix R = new Matrix(A.getRows(), A.getColumns());
+        for(int r = 0; r < R.getRows(); r++){
+            for(int c = 0; c < R.getColumns(); c++){
                 R.elements[r][c] = A.elementAt(r, c) / B.elementAt(r, c);
             }
         }
@@ -1032,7 +1032,7 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
 
 	@Override
 	public int size() {
-		return rows()*columns();
+		return getRows()* getColumns();
 	}
 
 	@Override
@@ -1056,9 +1056,9 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
 	@Override
 	public Double[][] toArray() {
 		if(isEmpty()) throw new EmptyMatrixException();
-        double[][] ret = new double[rows()][columns()];
-        for(int r = 0; r < rows(); r++){ 
-            System.arraycopy(elements[r], 0, ret[r], 0, columns());
+        double[][] ret = new double[getRows()][getColumns()];
+        for(int r = 0; r < getRows(); r++){
+            System.arraycopy(elements[r], 0, ret[r], 0, getColumns());
         }
         return ArrayUtils.toWrapper(ret);
 	}
@@ -1084,8 +1084,8 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
 
 	@Override
 	public boolean remove(Object o) {
-		for(int r = 0; r < rows(); r++){
-            for(int c = 0; c < columns(); c++){
+		for(int r = 0; r < getRows(); r++){
+            for(int c = 0; c < getColumns(); c++){
             	if(o.equals(this.elements[r][c])) {
             		this.clear(r, c);
             		return true;
@@ -1110,8 +1110,8 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
 	public boolean addAll(Collection<? extends Double> a) {
 		int i = 0;
         Double[] aa = (Double[]) a.toArray();
-    	for(int r = 0; r < rows(); r++){ 
-            for(int c = 0; c < columns(); c++){
+    	for(int r = 0; r < getRows(); r++){
+            for(int c = 0; c < getColumns(); c++){
             	if(i >= a.size()) {
             		elements[r][c] = defaultValue;
             	} else {
@@ -1183,7 +1183,7 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
         
         @Override
         public boolean hasNext() {
-        	return !(currentIndexR == rows()-1 && currentIndexC == columns());
+        	return !(currentIndexR == getRows()-1 && currentIndexC == getColumns());
         }
 
         /**
@@ -1196,7 +1196,7 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
         	}
         	int r;
         	int c;
-        	if(currentIndexC < columns()) {
+        	if(currentIndexC < getColumns()) {
         		r = currentIndexR;
         		c = currentIndexC++;
         	} else {

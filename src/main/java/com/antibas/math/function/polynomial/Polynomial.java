@@ -7,6 +7,7 @@ package com.antibas.math.function.polynomial;
 
 import com.antibas.math.function.FunctionClass;
 import com.antibas.util.ArrayUtils;
+import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.Vector;
@@ -17,6 +18,7 @@ import java.util.Vector;
  */
 public class Polynomial extends FunctionClass{
     protected double[] multiples;
+    @Getter
     protected int power;
     
     public Polynomial(double... m){
@@ -68,11 +70,7 @@ public class Polynomial extends FunctionClass{
         //multiples.set(multiples.size()-p-1, m);
     }
 
-	public int getPower() {
-		return power;
-	}
-
-	public final double getMultiple(int p){
+    public final double getMultiple(int p){
         return multiples[power-p];
     }
     

@@ -1,7 +1,9 @@
 package com.antibas.math.function.other;
 
 import com.antibas.math.Number2;
+import lombok.Getter;
 
+@Getter
 public class Domain<T extends Number2> {
 	private T dx;
 	private T start;
@@ -49,58 +51,34 @@ public class Domain<T extends Number2> {
 	/*public Domain2() {
 		this(Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, Function.DX, false, false);
 	}*/
-	
-	public T getStart() {
-		return start;
-	}
 
-	public void setStart(T start) {
+    public void setStart(T start) {
 		if(start.greaterThanOrEqual(end)) {
 			throw new IllegalArgumentException();
 		}
 		this.start = start;
 	}
 
-	public T getEnd() {
-		return end;
-	}
-
-	public void setEnd(T end) {
+    public void setEnd(T end) {
 		if(start.greaterThanOrEqual(end) || end.greaterThanOrEqual(next.start)) {
 			throw new IllegalArgumentException();
 		}
 		this.end = end;
 	}
 
-	public boolean isClosedStart() {
-		return closedStart;
-	}
-
-	public void setClosedStart(boolean closedStart) {
+    public void setClosedStart(boolean closedStart) {
 		this.closedStart = closedStart;
 	}
 
-	public boolean isClosedEnd() {
-		return closedEnd;
-	}
-
-	public void setClosedEnd(boolean closedEnd) {
+    public void setClosedEnd(boolean closedEnd) {
 		this.closedEnd = closedEnd;
 	}
-	
-	public T getDx() {
-		return dx;
-	}
 
-	public void setDx(T dx) {
+    public void setDx(T dx) {
 		this.dx = dx;
 	}
 
-	public Domain<T> getNext() {
-		return next;
-	}
-
-	public boolean isInDomain(T x) {
+    public boolean isInDomain(T x) {
 		if(x.lessThan(end) && x.greaterThan(start)) return true;
 		if(closedEnd && x.equals(end)) return true;
 		if(closedStart && x.equals(start)) return true;

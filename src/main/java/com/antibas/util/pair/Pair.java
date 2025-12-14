@@ -1,26 +1,16 @@
 package com.antibas.util.pair;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serial;
 import java.io.Serializable;
 
+@Setter
+@Getter
 public class Pair<V1, V2> implements Serializable{
 
-    public V1 getFirst() {
-        return first;
-    }
-
-    public void setFirst(V1 first) {
-        this.first = first;
-    }
-
-    public V2 getSecond() {
-        return second;
-    }
-
-    public void setSecond(V2 second) {
-        this.second = second;
-    }
-	/**
+    /**
 	 * 
 	 */
 	@Serial

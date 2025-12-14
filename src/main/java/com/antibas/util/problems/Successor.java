@@ -1,5 +1,10 @@
 package com.antibas.util.problems;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class Successor<S, A> {
 	private S state;
 	private A action;
@@ -22,31 +27,7 @@ public class Successor<S, A> {
 		this(state, action, 0d);
 	}
 
-	public S getState() {
-		return state;
-	}
-
-	public void setState(S state) {
-		this.state = state;
-	}
-
-	public A getAction() {
-		return action;
-	}
-
-	public void setAction(A action) {
-		this.action = action;
-	}
-
-	public double getCost() {
-		return cost;
-	}
-
-	public void setCost(double cost) {
-		this.cost = cost;
-	}
-
-	@Override
+    @Override
 	public String toString() {
 		return "Successor [state=" + state + ", action=" + action + ", cost=" + cost + "]";
 	}

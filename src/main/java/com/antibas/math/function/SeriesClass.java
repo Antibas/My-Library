@@ -1,7 +1,11 @@
 package com.antibas.math.function;
 
 import com.antibas.math.Number2;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public abstract class SeriesClass implements Series{
 	protected double amplitude;
 	protected double adder;
@@ -34,31 +38,7 @@ public abstract class SeriesClass implements Series{
 		return (SeriesClass)r;
 	}
 
-	public double getAmplitude() {
-		return amplitude;
-	}
-
-	public void setAmplitude(double amplitude) {
-		this.amplitude = amplitude;
-	}
-
-	public double getAdder() {
-		return adder;
-	}
-
-	public void setAdder(double adder) {
-		this.adder = adder;
-	}
-
-	public Domain getDomain() {
-		return domain;
-	}
-
-	public void setDomain(Domain domain) {
-		this.domain = domain;
-	}
-
-	@Override
+    @Override
 	public String toString() {
 		return toString("n");
 	}

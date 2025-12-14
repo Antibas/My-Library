@@ -1,5 +1,10 @@
 package com.antibas.util.itemset;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class Item {
 	private double weight;
 	private double benefit;
@@ -18,23 +23,7 @@ public class Item {
 		return benefit / weight;
 	}
 
-	public double getWeight() {
-		return weight;
-	}
-
-	public void setWeight(double weight) {
-		this.weight = weight;
-	}
-
-	public double getBenefit() {
-		return benefit;
-	}
-
-	public void setBenefit(double benefit) {
-		this.benefit = benefit;
-	}
-
-	@Override
+    @Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

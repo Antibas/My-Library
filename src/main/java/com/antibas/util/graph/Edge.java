@@ -1,9 +1,13 @@
 package com.antibas.util.graph;
 
 import com.antibas.util.Nameable;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
 
+@Getter
+@Setter
 public class Edge implements Nameable, Comparable<Edge>{
 	/**
 	 * 
@@ -15,7 +19,7 @@ public class Edge implements Nameable, Comparable<Edge>{
 	private boolean isExplored;
 	private boolean isDiscovery;
 	private boolean isBackEdge;
-	private final boolean isSelfLoop;
+    private final boolean isSelfLoop;
 	private double cost;
 	
 	public Edge(String name, double cost, boolean isSelfLoop) {
@@ -54,52 +58,6 @@ public class Edge implements Nameable, Comparable<Edge>{
 		this.isExplored = false;
 		this.isDiscovery = false;
 		this.isBackEdge = false;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public boolean isExplored() {
-		return isExplored;
-	}
-
-	public void setExplored(boolean explored) {
-		isExplored = explored;
-	}
-
-	public boolean isDiscovery() {
-		return isDiscovery;
-	}
-
-	public void setDiscovery(boolean discovery) {
-		isDiscovery = discovery;
-	}
-
-	public boolean isBackEdge() {
-		return isBackEdge;
-	}
-
-	public void setBackEdge(boolean backEdge) {
-		isBackEdge = backEdge;
-	}
-
-	public boolean isSelfLoop() {
-		return isSelfLoop;
-	}
-
-	public double getCost() {
-		return cost;
-	}
-
-	public void setCost(double cost) {
-		this.cost = cost;
 	}
 
 	@Override

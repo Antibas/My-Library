@@ -14,7 +14,7 @@ public enum NoteKey {
 	A_SHARP(29.14),
 	B(30.87);
 
-	private double frequency;
+	private final double frequency;
 
 	private NoteKey(double frequency) {
 		this.frequency = frequency;

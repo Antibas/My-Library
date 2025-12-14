@@ -15,8 +15,8 @@ public class MatrixGraph<V extends Vertex, E extends Edge> implements Graph<V, E
 	 */
 	private static final long serialVersionUID = 2362187127030808446L;
 	
-	private Matrix<E> edges;
-	private Vector<V> vertices;
+	private final Matrix<E> edges;
+	private final Vector<V> vertices;
 	
 	public MatrixGraph(Set<V> vertices) {
 		this.vertices = new Vector<>(vertices);
