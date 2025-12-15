@@ -21,14 +21,16 @@ public class AdjacencyTree<V extends Vertex, E extends Edge> extends AdjacencyGr
 		super();
 	}
 
-	public AdjacencyTree(Pair<? extends V, ? extends E>... p) {
+	@SafeVarargs
+    public AdjacencyTree(Pair<? extends V, ? extends E>... p) {
 		super(p);
 	}
 	
 	public AdjacencyTree(AdjacencyGraph<V, E> g) {
 		super();
 		AdjacencyGraph<V,E> gg = Methods.<AdjacencyGraph<V,E>>deepCopy(g);
-		gg.forEach((v, e) -> {
+        assert gg != null;
+        gg.forEach((v, e) -> {
 			this.putVertex(v, e);
 		});
 	}
@@ -82,8 +84,9 @@ public class AdjacencyTree<V extends Vertex, E extends Edge> extends AdjacencyGr
 		return ret;
 	}
 
-	@Override
-	public Set<E> putVertex(V vertex, E... edges) {
+	@SafeVarargs
+    @Override
+	public final Set<E> putVertex(V vertex, E... edges) {
 		if(!validate()) {
 			throw new InvalidTreeException(vertex.toString());
 		}

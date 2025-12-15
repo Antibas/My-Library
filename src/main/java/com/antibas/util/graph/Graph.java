@@ -24,8 +24,8 @@ public interface Graph<V extends Vertex, E extends Edge> extends Comparator<V>, 
 	 * vertex already exists, all edges in the set that are not already
 	 * connected with two existing vertices are merged 
 	 * into the existing edges.
-	 * @param vertex
-	 * @param edges
+	 * @param vertex s
+	 * @param edges s
 	 * @return all incident edges to vertex of the graph
 	 */
 	Set<E> putVertex(V vertex, Set<E> edges);
@@ -34,7 +34,7 @@ public interface Graph<V extends Vertex, E extends Edge> extends Comparator<V>, 
 	 * vertex already exists, all edges in the set that are not already
 	 * connected with two existing vertices are merged 
 	 * into the existing edges.
-	 * @param vertex
+	 * @param vertex s
 	 * @return all incident edges to vertex of the graph
 	 */
 	Set<E> putVertex(V vertex);
@@ -43,16 +43,16 @@ public interface Graph<V extends Vertex, E extends Edge> extends Comparator<V>, 
 	 * vertex already exists, all edges in the set that are not already
 	 * connected with two existing vertices are merged 
 	 * into the existing edges set.
-	 * @param vertex
-	 * @param edges
+	 * @param vertex s
+	 * @param edges s
 	 * @return all incident edges to vertex of the graph
 	 */
 	Set<E> putVertex(V vertex, E... edges);
 	/**
 	 * Puts an edge connecting two vertices.
-	 * @param vertex1
-	 * @param vertex2
-	 * @param edge
+	 * @param vertex1 s
+	 * @param vertex2 s
+	 * @param edge s
 	 * @return the first vertex
 	 */
 	V putEdge(V vertex1, V vertex2, E edge);
@@ -61,21 +61,21 @@ public interface Graph<V extends Vertex, E extends Edge> extends Comparator<V>, 
 	 * vertex already exists and the edge is not already
 	 * connected with two existing vertices, it is merged with
 	 * the vertex's edge set.
-	 * @param vertex
-	 * @param edge
+	 * @param vertex s
+	 * @param edge s
 	 * @return the vertex
 	 */
 	V putEdge(V vertex, E edge);
 	/**
 	 * Removes an edge from a specific vertex
-	 * @param vertex
-	 * @param edge
+	 * @param vertex s
+	 * @param edge s
 	 * @return true if successfully removed
 	 */
 	boolean removeEdge(V vertex, E edge);
 	/**
 	 * Removes an edge from all vertices
-	 * @param edge
+	 * @param edge s
 	 * @return true
 	 */
 	boolean removeEdge(E edge);

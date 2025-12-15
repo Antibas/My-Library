@@ -23,7 +23,7 @@ public class Tan extends Sin {
 
 	@Override
 	public Double apply(Double t) {
-		return amplitude*Math.tan(frequency*t + this.getPhase())+adder;
+		return super.apply(Math.tan(frequency*t + this.getPhase()));
 	}
 	
 	@Override

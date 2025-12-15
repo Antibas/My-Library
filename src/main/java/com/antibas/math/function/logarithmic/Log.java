@@ -26,7 +26,7 @@ public class Log extends FunctionClass{
 
     @Override
 	public Double apply(Double t) {
-		return amplitude*Math.log10(t)/Math.log10(base) + adder;
+		return super.apply(Math.log10(t)/Math.log10(base));
 	}
 	
 	@Override

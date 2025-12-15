@@ -12,7 +12,7 @@ import java.util.Vector;
  * @author User
  */
 public class QuestionCard extends CAHCard{
-    public final static String ANSWERBLOCK = "_____";
+    public final static String ANSWER_BLOCK = "_____";
 
     public QuestionCard(String description) {
         super(description);
@@ -22,7 +22,7 @@ public class QuestionCard extends CAHCard{
         String desc = description;
         Vector<String> answers = answerCard.getAnswers();
         for(String a: answers){
-            desc = desc.replaceFirst(ANSWERBLOCK, a);
+            desc = desc.replaceFirst(ANSWER_BLOCK, a);
         }
         return desc;
     }
@@ -30,7 +30,7 @@ public class QuestionCard extends CAHCard{
     public String getAnswers(String... answers){
         String desc = description;
         for(String a: answers){
-            desc = desc.replaceFirst(ANSWERBLOCK, a);
+            desc = desc.replaceFirst(ANSWER_BLOCK, a);
         }
         return desc;
     }

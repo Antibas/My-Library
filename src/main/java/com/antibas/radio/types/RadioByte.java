@@ -1,6 +1,8 @@
 package com.antibas.radio.types;
 
 import com.antibas.util.list.IndexConvertor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Collection;
 import java.util.Deque;
@@ -9,8 +11,10 @@ import java.util.LinkedList;
 import java.util.function.Function;
 
 public class RadioByte implements Iterable<Boolean>, IndexConvertor, RadioType{
-	private Deque<Boolean> bits;
+	private final Deque<Boolean> bits;
+	@Getter @Setter
 	private int size;
+	@Getter @Setter
 	private Endian endian;
 	
 	public RadioByte(int size, Collection<Boolean> bits, Endian endian) {
@@ -82,7 +86,7 @@ public class RadioByte implements Iterable<Boolean>, IndexConvertor, RadioType{
 	}
 	
 	public void appendFront(int bit) {
-		this.appendFront(bit==1);
+		this.appendFront(bit!=0);
 	}
 	
 	public void appendBack(boolean bit) {
@@ -93,7 +97,7 @@ public class RadioByte implements Iterable<Boolean>, IndexConvertor, RadioType{
 	}
 	
 	public void appendBack(int bit) {
-		this.appendBack(bit==1);
+		this.appendBack(bit!=0);
 	}
 	
 	public void shiftFront(int times) {
@@ -137,7 +141,7 @@ public class RadioByte implements Iterable<Boolean>, IndexConvertor, RadioType{
 		int s = 0;
 		for(int i = 0; i < size; i++) {
 			if(this.bitAt(i)) {
-				s += Math.pow(2, i);
+				s += (int) Math.pow(2, i);
 			}
 		}
 		return s;
@@ -148,7 +152,7 @@ public class RadioByte implements Iterable<Boolean>, IndexConvertor, RadioType{
 		byte s = 0;
 		for(int i = 0; i < size; i++) {
 			if(this.bitAt(i)) {
-				s += Math.pow(2, i);
+				s += (byte) Math.pow(2, i);
 			}
 		}
 		return s;
@@ -159,7 +163,7 @@ public class RadioByte implements Iterable<Boolean>, IndexConvertor, RadioType{
 		short s = 0;
 		for(int i = 0; i < size; i++) {
 			if(this.bitAt(i)) {
-				s += Math.pow(2, i);
+				s += (short) Math.pow(2, i);
 			}
 		}
 		return s;
@@ -170,7 +174,7 @@ public class RadioByte implements Iterable<Boolean>, IndexConvertor, RadioType{
 		char s = 0;
 		for(int i = 0; i < size; i++) {
 			if(this.bitAt(i)) {
-				s += Math.pow(2, i);
+				s += (char) Math.pow(2, i);
 			}
 		}
 		return s;
@@ -214,12 +218,12 @@ public class RadioByte implements Iterable<Boolean>, IndexConvertor, RadioType{
 	
 	@Override
 	public String toString() {
-		String ret = "";
+		StringBuilder ret = new StringBuilder();
 		for(boolean bit: bits) {
-			if(bit) ret += 1;
-			else ret += 0;
+			if(bit) ret.append(1);
+			else ret.append(0);
 		}
-		return ret;
+		return ret.toString();
 	}
 
 	@Override

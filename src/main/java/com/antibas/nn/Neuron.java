@@ -7,7 +7,7 @@ import java.util.Vector;
 
 public class Neuron {
 	private double bias;
-	private Vector<Double> prevWeights;
+	private final Vector<Double> prevWeights;
 	
 	public Neuron(double bias, Collection<? extends Double> prevWeights) {
         this.bias = bias;

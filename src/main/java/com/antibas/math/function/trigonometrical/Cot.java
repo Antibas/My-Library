@@ -6,7 +6,7 @@ public class Cot extends Sin {
 //		if(phaseModifier == RADIANS) {
 //			return amplitude/Math.tan(frequency*t + phase)+adder;
 //		}
-		return amplitude/Math.tan(frequency*t + this.getPhase())+adder;
+		return super.apply(1/Math.tan(frequency*t + this.getPhase()));
 	}
 	
 	@Override

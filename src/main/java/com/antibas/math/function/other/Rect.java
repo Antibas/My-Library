@@ -24,7 +24,7 @@ public class Rect extends FunctionClass {
 	
 	@Override
 	public Double apply(Double t) {
-		return amplitude*((t > -T/2 && t < T/2)? 1.0d : 0.0d) + adder;
+		return super.apply((t > -T/2 && t < T/2)? 1.0d : 0.0d);
 	}
 
 	@Override

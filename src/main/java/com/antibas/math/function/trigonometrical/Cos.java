@@ -23,7 +23,7 @@ public class Cos extends Sin {
 
 	@Override
 	public Double apply(Double t) {
-		return amplitude*Math.cos(frequency*t + this.getPhase())+adder;
+		return super.apply(Math.cos(frequency*t + this.getPhase()));
 	}
 	
 	@Override

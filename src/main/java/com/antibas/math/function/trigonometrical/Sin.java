@@ -58,7 +58,7 @@ public class Sin extends FunctionClass{
 //			return amplitude*Math.sin(frequency*t + phase) + adder;
 //
 //		}
-		return amplitude*Math.sin(frequency*t + (this.getPhase())) + adder;
+		return super.apply(Math.sin(frequency*t + (this.getPhase())));
 	}
 
 	@Override

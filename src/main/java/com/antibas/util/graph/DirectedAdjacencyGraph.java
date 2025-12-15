@@ -26,18 +26,15 @@ public class DirectedAdjacencyGraph<V extends Vertex, E extends DirectedEdge> ex
 		super(m);
 	}
 
-	public DirectedAdjacencyGraph(Pair<? extends V, ? extends E>... p) {
+	@SafeVarargs
+    public DirectedAdjacencyGraph(Pair<? extends V, ? extends E>... p) {
 		super(p);
 	}
 
 	@Override
 	public Set<E> incidentEdges(String vertex) {
 		Set<E> inc = super.incidentEdges(vertex);
-		for(E e: inc) {
-			if(e.getDirection() == Direction.FROM) {
-				inc.remove(e);
-			}
-		}
+        inc.removeIf(e -> e.getDirection() == Direction.FROM);
 		return inc;
 	}
 }

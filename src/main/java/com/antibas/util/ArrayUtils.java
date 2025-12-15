@@ -134,11 +134,7 @@ public final class ArrayUtils {
 	}
 	
 	public static double[] zerosDouble(int n) {
-		double[] z = new double[n];
-		for(int i = 0; i < n; i++) {
-			z[i] = 0;
-		}
-		return z;
+        return new double[n];
 	}
 	
 	public static double[][] zerosDouble(int n, int m) {
@@ -153,9 +149,7 @@ public final class ArrayUtils {
 	
 	public static int[] onesInt(int n) {
 		int[] z = new int[n];
-		for(int i = 0; i < n; i++) {
-			z[i] = 1;
-		}
+        Arrays.fill(z, 1);
 		return z;
 	}
 	
@@ -170,11 +164,7 @@ public final class ArrayUtils {
 	}
 	
 	public static boolean[] falses(int n) {
-		boolean[] z = new boolean[n];
-		for(int i = 0; i < n; i++) {
-			z[i] = false;
-		}
-		return z;
+        return new boolean[n];
 	}
 	
 	public static double max(double[] arr) {

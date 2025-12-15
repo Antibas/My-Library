@@ -5,6 +5,8 @@
  */
 package com.antibas.math.matrix;
 
+import java.io.Serial;
+
 /**
  *
  * @author User
@@ -14,6 +16,7 @@ public class EmptyMatrixException extends RuntimeException {
     /**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 328611355730645968L;
 
 	public EmptyMatrixException() {

@@ -6,6 +6,7 @@
 package com.antibas.games.cards.standard;
 
 import com.antibas.games.cards.Card;
+import lombok.Getter;
 
 import java.util.Objects;
 
@@ -15,6 +16,7 @@ import java.util.Objects;
  and a value. 
  * @author Antibassis
  */
+@Getter
 public class StandardCard extends Card {
     private StandardSuit suit;
     private StandardNumber number;
@@ -46,14 +48,6 @@ public class StandardCard extends Card {
     @Override
     public String toString(){
         return getName() + ((points == 0)?"":(" Points: " + points));
-    }
-
-    public StandardSuit getSuit(){
-        return suit;
-    }
-
-    public StandardNumber getNumber(){
-        return number;
     }
 
     public int getRate(){

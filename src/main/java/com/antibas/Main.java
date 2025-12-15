@@ -19,7 +19,7 @@ public class Main {
             {QueryState.STRING_LITERAL, QueryState.BOOLEAN_OPERATOR, QueryState.EXPRESSION},
             {QueryState.EXPRESSION, QueryState.BOOLEAN_OPERATOR, QueryState.STRING_LITERAL}
         };
-        System.out.println(new QueryParser().compile("\"Interpretable\" OR \"Interpretability\""));
+        System.out.println(new QueryParser().compile("\"Interpretable\" OR \"Interpretability\" AND \"Nigga\""));
 		  /*
 		  Graph<Vertex, Edge> G = new Graph<>();
 		  Vertex A = new Vertex("A");

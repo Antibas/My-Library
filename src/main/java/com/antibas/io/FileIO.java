@@ -45,14 +45,14 @@ public abstract class FileIO {
     public static String fileToString(File f) throws FileNotFoundException{
         BufferedReader reader = getBufferedReader(f);
         String text;
-        String rettext = "";
+        StringBuilder rettext = new StringBuilder();
         try {
             while ((text = reader.readLine()) != null)
-                rettext += text;
+                rettext.append(text);
         } catch (IOException ex) {
             throw new Error(ex.getMessage());
         }
-        return rettext;
+        return rettext.toString();
     }
     
     public static void forEachLine(File f, Function<? super String, ? extends String> action) throws IOException{

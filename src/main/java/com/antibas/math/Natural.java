@@ -2,12 +2,15 @@ package com.antibas.math;
 
 import lombok.Getter;
 
+import java.io.Serial;
+
 @Getter
 public final class Natural extends Number2 {
 	
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 5636100019717487640L;
 	private long value;
 	

@@ -23,7 +23,7 @@ public class RandomVariable<T> extends HashMap<T, Double>{
 	@Serial
 	private static final long serialVersionUID = -1579801726158896925L;
 	
-	public static final double MAXPOSSIBILITY = 1.0d;
+	public static final double MAX_POSSIBILITY = 1.0d;
     
     public RandomVariable() {
 		super();
@@ -51,22 +51,22 @@ public class RandomVariable<T> extends HashMap<T, Double>{
 	@Override
 	public void putAll(Map<? extends T, ? extends Double> m) {
 		super.putAll(m);
-		if(totalOdds() > MAXPOSSIBILITY) throw new RuntimeException();
+		if(totalOdds() > MAX_POSSIBILITY) throw new RuntimeException();
 	}
 
 	@Override
 	public Double putIfAbsent(T key, Double value) {
-		if(totalOdds() == MAXPOSSIBILITY) throw new RuntimeException();
+		if(totalOdds() == MAX_POSSIBILITY) throw new RuntimeException();
         double s = super.putIfAbsent(key, value);
-        if(totalOdds() > MAXPOSSIBILITY) return super.remove(key);
+        if(totalOdds() > MAX_POSSIBILITY) return super.remove(key);
         return s;
 	}
 
 	@Override
     public Double put(T key, Double value){
-        if(totalOdds() == MAXPOSSIBILITY) throw new RuntimeException();
+        if(totalOdds() == MAX_POSSIBILITY) throw new RuntimeException();
         Double s = super.put(key, value);
-        if(totalOdds() > MAXPOSSIBILITY) return super.remove(key);
+        if(totalOdds() > MAX_POSSIBILITY) return super.remove(key);
         return s;
     }
 	

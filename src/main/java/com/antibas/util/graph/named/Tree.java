@@ -1,9 +1,10 @@
 package com.antibas.util.graph.named;
 
+import com.antibas.util.graph.AdjacencyTree;
 import com.antibas.util.graph.Edge;
 import com.antibas.util.graph.Vertex;
 
-public class Tree extends com.antibas.util.graph.AdjacencyTree<Vertex, Edge> {
+public class Tree extends AdjacencyTree<Vertex, Edge> {
 
 	/**
 	 * 

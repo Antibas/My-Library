@@ -24,7 +24,7 @@ public class Exp extends FunctionClass {
 
     @Override
 	public Double apply(Double t) {
-		return amplitude*Math.pow(base, t) + adder;
+		return super.apply(Math.pow(base, t));
 	}
 
 	@Override

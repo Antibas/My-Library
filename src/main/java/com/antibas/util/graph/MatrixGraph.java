@@ -3,6 +3,7 @@ package com.antibas.util.graph;
 import com.antibas.math.matrix.template.Matrix;
 import com.antibas.util.Methods;
 
+import java.io.Serial;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +14,7 @@ public class MatrixGraph<V extends Vertex, E extends Edge> implements Graph<V, E
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = 2362187127030808446L;
 	
 	private final Matrix<E> edges;
@@ -23,7 +25,8 @@ public class MatrixGraph<V extends Vertex, E extends Edge> implements Graph<V, E
 		this.edges = new Matrix<>(vertices.size(), vertices.size(), null);
 	}
 
-	public MatrixGraph(V... vertices) {
+	@SafeVarargs
+    public MatrixGraph(V... vertices) {
 		this(Methods.arrayToSet(vertices));
 	}
 	

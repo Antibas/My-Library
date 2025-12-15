@@ -1,5 +1,8 @@
 package com.antibas.games.backgammon;
 
+import lombok.Getter;
+
+@Getter
 public class Position {
 	private int place;
 	private boolean up;
@@ -9,11 +12,7 @@ public class Position {
 		this.up = up;
 	}
 
-	public int getPlace() {
-		return place;
-	}
-
-	public void move(int by) {
+    public void move(int by) {
 		if(place+by > Table.SIZE) {
 			place = (place+by) % Table.SIZE;
 			changeSide();
@@ -22,11 +21,7 @@ public class Position {
 		}
 	}
 
-	public boolean isUp() {
-		return up;
-	}
-
-	public void changeSide() {
+    public void changeSide() {
 		this.up = !this.up;
 	}
 	

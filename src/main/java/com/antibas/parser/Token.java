@@ -9,27 +9,19 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @ToString
-public class Token<E extends Enum<E>>  {
-    private String value;
-    private E state;
+public class Token<E extends Enum<E>, T>  {
+    protected T value;
+    protected E state;
 
-    public Token(String value) {
+    public Token(T value) {
         this(value, null);
     }
 
     public Token(E state) {
-        this("", state);
+        this(null, state);
     }
 
     public Token() {
-        this("", null);
-    }
-
-    public void append(String value) {
-        this.value += value;
-    }
-
-    public void append(char value) {
-        this.value += value;
+        this(null, null);
     }
 }

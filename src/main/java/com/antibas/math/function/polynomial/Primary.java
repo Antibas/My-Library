@@ -7,6 +7,9 @@ package com.antibas.math.function.polynomial;
 
 import com.antibas.math.Complex;
 
+import java.util.List;
+import java.util.Vector;
+
 /**
  *
  * @author User
@@ -26,7 +29,7 @@ public class Primary extends Polynomial{
     }
     
     @Override
-    public Complex[] solveForZero(){
-        return new Complex[]{new Complex(-getMultiple(0) / getMultiple(1))};
+    public List<Complex> solveForZero(){
+        return List.of(new Complex(-getMultiple(0) / getMultiple(1)));
     }
 }

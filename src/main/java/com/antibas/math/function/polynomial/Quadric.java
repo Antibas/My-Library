@@ -7,6 +7,8 @@ package com.antibas.math.function.polynomial;
 
 import com.antibas.math.Complex;
 
+import java.util.List;
+
 /**
  *
  * @author User
@@ -22,7 +24,7 @@ public class Quadric extends Polynomial{
     }
     
     @Override
-    public Complex[] solveForZero(){
+    public List<Complex> solveForZero(){
     	double D;
         Complex[] s = new Complex[2];
         
@@ -38,7 +40,7 @@ public class Quadric extends Polynomial{
         	s[1] = new Complex(-getMultiple(1) / 2.0 * getMultiple(2), -Math.sqrt(-D) / 2.0 * getMultiple(2));
         }
         
-        return s;
+        return List.of(s[0], s[1]);
     }
 
 }

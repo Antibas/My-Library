@@ -422,7 +422,7 @@ public class AdjacencyGraph<V extends Vertex, E extends Edge> extends HashMap<V,
 		}
 		
 		if(this.getVertex(vertex).equals(p.get(1))) {
-			return p.get(0);
+			return p.getFirst();
 		}
 		return null;
 	}

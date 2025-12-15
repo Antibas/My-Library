@@ -12,9 +12,7 @@ import com.antibas.games.cards.Card;
  * @author User
  */
 public abstract class CAHCard extends Card {
-    
     public CAHCard(String description) {
         super("", description, 0);
     }
-    
 }

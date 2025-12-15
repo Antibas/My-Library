@@ -46,4 +46,9 @@ public abstract class FunctionClass implements Function{
 	}
 	
 	public abstract String toString(String var);
+
+	@Override
+	public Double apply(Double aDouble) {
+		return amplitude*aDouble + adder;
+	}
 }

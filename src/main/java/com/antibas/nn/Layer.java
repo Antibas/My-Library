@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Vector;
 
 public class Layer {
-	private Vector<Neuron> neurons;
+	private final Vector<Neuron> neurons;
 	public Layer(Collection<? extends Neuron> neurons){
 		this.neurons = new Vector<>(neurons);
     }

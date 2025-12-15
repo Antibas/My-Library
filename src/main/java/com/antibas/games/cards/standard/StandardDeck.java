@@ -15,7 +15,6 @@ import static com.antibas.games.cards.standard.StandardNumber.*;
  * @author Antibassis
  */
 public class StandardDeck extends Deck<StandardCard>{
-    
     public StandardDeck(boolean jokers){
         super((jokers)? 52:54);
         StandardNumber[] numbers = StandardNumber.values();

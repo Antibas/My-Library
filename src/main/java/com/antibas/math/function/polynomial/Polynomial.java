@@ -130,29 +130,29 @@ public class Polynomial extends FunctionClass{
     
     @Override
     public String toString(String var) {
-    	String ret = "";
+    	StringBuilder ret = new StringBuilder();
         double m;
         for(int p = power; p >= 0; p--){
             m = getMultiple(p);
             if(m == 0) continue;
-            if(m > 0 && p != power) ret += "+";
+            if(m > 0 && p != power) ret.append("+");
             
             if(p != 0){
                 if(m == 1.0) {
-                    if(p != 1) ret += var + "^" + p;
-                    else ret += var;
+                    if(p != 1) ret.append(var).append("^").append(p);
+                    else ret.append(var);
                 } else if(m == -1.0) {
-                    if(p != 1) ret += "-" + var + "^" + p;
-                    else ret += "-" + var;
+                    if(p != 1) ret.append("-").append(var).append("^").append(p);
+                    else ret.append("-").append(var);
                 } else {
-                    if(p != 1) ret += m + var + "^" + p;
-                    else ret += m + var;
+                    if(p != 1) ret.append(m).append(var).append("^").append(p);
+                    else ret.append(m).append(var);
                 }
             } else {
-                ret += m;
+                ret.append(m);
             }
         }
-        return ret;
+        return ret.toString();
     }
     
     @Override

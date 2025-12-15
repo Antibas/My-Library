@@ -30,16 +30,6 @@ public final class Math2{
      */
     public static final double E =  2.71828;
     /**
-     * Imaginary element.
-     */
-    //public static final int n = n(1);
-    /*public static int n(int power){
-        if(power == 1) return 0;
-        if(power == 2) return -1;
-        if(isEven(power)) return n(power/2);
-        return 0;
-    }*/
-    /**
      * Pseudo-Infinity, being the max long.
      */
     public static final long INF = Long.MAX_VALUE;
@@ -110,7 +100,7 @@ public final class Math2{
     	//if(n<0) throw new IllegalArgumentException();
         //if(n == 0) return 0;
         if(n <= 1) return n;
-        int F[] = new int[n+1];
+        int[] F = new int[n+1];
         F[0] = 0;
         F[1] = 1;
         for(int i = 2; i < n+1; i++) {
@@ -143,7 +133,6 @@ public final class Math2{
     
     /**
      * Returns the number of ways of selecting k objects from n unlike objects
-     * 
      * It is equivalent with P(n, k)/fac(k)
      * @param n the number of initial objects
      * @param k the number of objects taken
@@ -251,10 +240,10 @@ public final class Math2{
     }
     
     public static <T> T choice(Collection<T> objects){
-    	if(objects.size() == 0) {
+    	if(objects.isEmpty()) {
     		return null;//throw new IllegalArgumentException();
     	}
-    	return Math2.<T>choice((T[])objects.toArray());
+    	return objects.stream().toList().get(RNG(0, objects.size()-1));
     	/*int item = new Random().nextInt(objects.size()); 
     	int i = 0;
     	for(T obj : objects)
@@ -303,12 +292,12 @@ public final class Math2{
      * @param n an integer
      * @return all the dividends of n except n and 1.
      */
-    public static Integer[] getDividends(int n){
+    public static Vector<Integer> getDividends(int n){
         Vector<Integer> d = new Vector<>();
         for(int i = 2; i < n; i++)
             if(n%i==0) d.add(i);
         if(d.isEmpty()) d.add(n);
-        return (Integer[]) d.toArray();
+        return d;
     }
     
     /**
@@ -318,7 +307,7 @@ public final class Math2{
      * the integer itself if prime.
      */
     public static int firstDividend(int n){
-        return getDividends(n)[0];
+        return getDividends(n).getFirst();
     }
     
     /**
@@ -536,6 +525,10 @@ public final class Math2{
         int an_1 = recaman(n-1);
         return an_1 > n? an_1-n : an_1+n;
 
+    }
+
+    public static long tree(int n){
+        return (long)Math.pow(2, n)-1;
     }
 }
 

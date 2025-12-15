@@ -6,15 +6,22 @@
 package com.antibas.games.cards;
 
 import com.antibas.util.Nameable;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serial;
 
 /**
  *
  * @author User
  */
+@Setter
+@Getter
 public abstract class Card implements Nameable {
     /**
 	 * 
 	 */
+    @Serial
 	private static final long serialVersionUID = 2343352808775070403L;
 	protected String name;
     protected String description;
@@ -37,29 +44,6 @@ public abstract class Card implements Nameable {
     public Card() {
         this("", "", 0);
     }
-    
-    
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
-    public void setPoints(int points) {
-        this.points = points;
-    }
-    
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getPoints() {
-        return points;
-    }
 }

@@ -5,6 +5,11 @@
  */
 package com.antibas.util;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class MyTime {
     private int hours, minutes, seconds, milliseconds;
     
@@ -31,38 +36,6 @@ public class MyTime {
     
     public int toSeconds(){
         return hours*3600 + minutes*60 + seconds + milliseconds*1000;
-    }
-
-    public int getHours() {
-        return hours;
-    }
-
-    public void setHours(int hours) {
-        this.hours = hours;
-    }
-
-    public int getMinutes() {
-        return minutes;
-    }
-
-    public void setMinutes(int minutes) {
-        this.minutes = minutes;
-    }
-
-    public int getSeconds() {
-        return seconds;
-    }
-
-    public void setSeconds(int seconds) {
-        this.seconds = seconds;
-    }
-
-    public int getMilliseconds() {
-        return milliseconds;
-    }
-
-    public void setMilliseconds(int milliseconds) {
-        this.milliseconds = milliseconds;
     }
 
     @Override

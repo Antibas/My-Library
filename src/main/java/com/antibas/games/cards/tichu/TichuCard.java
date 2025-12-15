@@ -6,11 +6,13 @@
 package com.antibas.games.cards.tichu;
 
 import com.antibas.games.cards.Card;
+import lombok.Getter;
 
 /**
  *
  * @author User
  */
+@Getter
 public class TichuCard extends Card{
     private final TichuSuit suit;
     private final TichuNumber number;
@@ -24,13 +26,5 @@ public class TichuCard extends Card{
         suit = su;
         number = num;
     }
-    
-	public TichuSuit getSuit() {
-		return suit;
-	}
-
-	public TichuNumber getNumber() {
-		return number;
-	}
 
 }

@@ -5,8 +5,8 @@ import com.antibas.math.function.Function;
 import java.util.Vector;
 
 public class NeuralNetwork {
-	private Layer[] layers;
-	private Function activationFunction;
+	private final Layer[] layers;
+	private final Function activationFunction;
 	
 	public NeuralNetwork(Function activationFunction, int... layerSizes) {
 		this.activationFunction = activationFunction;

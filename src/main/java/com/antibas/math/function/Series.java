@@ -11,7 +11,7 @@ package com.antibas.math.function;
  * @author User
  */
 public interface Series extends java.util.function.Function<Integer, Double>{
-    public default double sum(int a, int b){
+    default double sum(int a, int b){
         if(a >= b) throw new IllegalArgumentException();
         double S = 0d;
         for(int n = a; n <= b; n++){
@@ -20,7 +20,7 @@ public interface Series extends java.util.function.Function<Integer, Double>{
         return S;
     }
     
-    public default double limit(int l){
+    default double limit(int l){
         return apply(l-1);
     }
     

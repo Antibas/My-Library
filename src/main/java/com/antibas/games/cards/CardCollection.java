@@ -18,7 +18,6 @@ public class CardCollection<T extends Card> extends Vector<T> {
 		super(initialCapacity);
 	}
 	
-	
     public T getTopCard(){
         return remove(0);
     }

@@ -5,6 +5,9 @@
  */
 package com.antibas.games.cards;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Stack;
 import java.util.Vector;
 
@@ -15,6 +18,7 @@ import java.util.Vector;
  */
 public abstract class Player<T extends Card> {
     protected Vector<T> hand, stock;
+    @Setter @Getter
     protected int points;
     
     public Player(int p){
@@ -27,7 +31,8 @@ public abstract class Player<T extends Card> {
         hand.addElement(c);
     }
     
-    public void addToHand(T... c){
+    @SafeVarargs
+    public final void addToHand(T... c){
         for(T cc: c)
             addToHand(cc);
     }
@@ -71,13 +76,5 @@ public abstract class Player<T extends Card> {
     
     public void removePoints(int p){
         points -= p;
-    }
-    
-    public void setPoints(int p){
-        points = p;
-    }
-    
-    public int getPoints(){
-        return points;
     }
 }

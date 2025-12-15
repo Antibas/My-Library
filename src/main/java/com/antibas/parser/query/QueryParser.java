@@ -1,6 +1,7 @@
 package com.antibas.parser.query;
 
 import com.antibas.parser.Parser;
+import com.antibas.util.Json;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -169,35 +170,45 @@ public class QueryParser extends Parser<QueryState, QueryToken, String> {
                 }
             }
         }
-        return (!stack.isEmpty() && stack.getFirst().getState() == QueryState.EXPRESSION) ? stack.getFirst().getValue(): null;
+        Json json = new Json();
+        if(!stack.isEmpty() && stack.getFirst().getState() == QueryState.EXPRESSION) {
+            json.put("query", stack.getFirst().getValue());
+            return json.toString();
+        }
+        return null;
     }
 
     @Override
     public String convert(List<QueryToken> tokens) {
-        if (tokens.size() == 1) return tokens.getFirst().getValue();
+        Json json = new Json();
+        if (tokens.size() == 1){
+            json.put("query", tokens.getFirst().getValue());
+        }
 
         if (tokens.size() == 3){
-            String left, operator, right, leftExpression, rightExpression;
             List<String> values = tokens.stream().map(t -> t.getValue().replace("\"", "")).toList();
-            return """
-                   {
-                       "$%s": [
-                           {
-                                "$or": [
-                                    {"title": {"$regex": %s, "$options": "i"}},
-                                    {"abstract": {"$regex": %s, "$options": "i"}}
-                                ]
-                           },
-                           {
-                             "$or": [
-                                 {"title": {"$regex": %s, "$options": "i"}},
-                                 {"abstract": {"$regex": %s, "$options": "i"}}
-                             ]
-                           }
-                       ]
-                   }
-            """.formatted(values.get(1).toLowerCase(), values.get(0), values.get(0), values.get(2), values.get(2));
+            json.put("$%s".formatted(values.get(1).toLowerCase()), Arrays.asList(tokens.get(0).getValue(), tokens.get(2).getValue()));
+//            String left, operator, right, leftExpression, rightExpression;
+//            List<String> values = tokens.stream().map(t -> t.getValue().replace("\"", "")).toList();
+//            return """
+//                   {
+//                       "$%s": [
+//                           {
+//                                "$or": [
+//                                    {"title": {"$regex": %s, "$options": "i"}},
+//                                    {"abstract": {"$regex": %s, "$options": "i"}}
+//                                ]
+//                           },
+//                           {
+//                                "$or": [
+//                                    {"title": {"$regex": %s, "$options": "i"}},
+//                                    {"abstract": {"$regex": %s, "$options": "i"}}
+//                                ]
+//                           }
+//                       ]
+//                   }
+//            """.formatted(values.get(1).toLowerCase(), values.get(0), values.get(0), values.get(2), values.get(2));
         }
-        return null;
+        return json.toString();
     }
 }

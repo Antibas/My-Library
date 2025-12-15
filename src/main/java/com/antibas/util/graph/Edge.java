@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serial;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -74,15 +75,20 @@ public class Edge implements Nameable, Comparable<Edge>{
 	
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Edge) {
-			return ((Edge)obj).name.equals(name);
+		if(obj instanceof Edge edge) {
+			return edge.name.equals(name);
 		}
 		
-		if(obj instanceof String) {
-			return ((String)obj).equals(name);
+		if(obj instanceof String str) {
+			return str.equals(name);
 		}
 		
 		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, isExplored, isDiscovery, isBackEdge, isSelfLoop, cost);
 	}
 
 	@Override

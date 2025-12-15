@@ -5,7 +5,7 @@ public enum Color {
 	
 	public final boolean color;
 
-	private Color(boolean color) {
+	Color(boolean color) {
 		this.color = color;
 	}
 	

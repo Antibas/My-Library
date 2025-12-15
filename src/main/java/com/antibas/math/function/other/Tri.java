@@ -24,7 +24,7 @@ public class Tri extends FunctionClass {
 	
 	@Override
 	public Double apply(Double t) {
-		return amplitude*((t > -T && t < T)? (1.0d - Math.abs(t)/T) : 0.0d) + adder;
+		return super.apply((t > -T && t < T)? (1.0d - Math.abs(t)/T) : 0.0d);
 	}
 	
 	@Override

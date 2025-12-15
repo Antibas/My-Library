@@ -13,23 +13,23 @@ import java.util.stream.StreamSupport;
 public class Word {
     public static final int LENGTH = 5;
 
-    private final String word;
+    private final String text;
     private final List<LetterStatus> letterStatuses;
     private static Set<String> POSSIBLE_WORDS = null;
 
-    public Word(String word, List<LetterStatus> letterStatuses) {
-        assert word.length() == LENGTH && letterStatuses.size() == LENGTH;
-        this.word = word.toLowerCase();
+    public Word(String text, List<LetterStatus> letterStatuses) {
+        assert text.length() == LENGTH && letterStatuses.size() == LENGTH;
+        this.text = text.toLowerCase();
         this.letterStatuses = letterStatuses;
         POSSIBLE_WORDS = getDictionary();
     }
 
-    public Word(String word, LetterStatus... letterStatuses) {
-        this(word, List.of(letterStatuses));
+    public Word(String text, LetterStatus... letterStatuses) {
+        this(text, List.of(letterStatuses));
     }
 
-    public Word(String word) {
-        this(word, List.of(LetterStatus.values()).subList(0, LENGTH));
+    public Word(String text) {
+        this(text, List.of(LetterStatus.values()).subList(0, LENGTH));
     }
 
     public void addLetterStatus(LetterStatus letterStatuses) {
@@ -44,9 +44,9 @@ public class Word {
                     .stream()
                     .filter(w ->
                         switch (letterStatuses.get(finalI)) {
-                            case WRONG -> !w.contains(String.valueOf(word.charAt(finalI)));
-                            case EXISTS -> w.contains(String.valueOf(word.charAt(finalI))) && w.charAt(finalI) != word.charAt(finalI);
-                            case CORRECT -> w.charAt(finalI) == word.charAt(finalI);
+                            case WRONG -> !w.contains(String.valueOf(text.charAt(finalI)));
+                            case EXISTS -> w.contains(String.valueOf(text.charAt(finalI))) && w.charAt(finalI) != text.charAt(finalI);
+                            case CORRECT -> w.charAt(finalI) == text.charAt(finalI);
                         }
                     )
                     .collect(Collectors.toSet());

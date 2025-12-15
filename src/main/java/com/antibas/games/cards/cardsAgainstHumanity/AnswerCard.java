@@ -5,6 +5,8 @@
  */
 package com.antibas.games.cards.cardsAgainstHumanity;
 
+import lombok.Getter;
+
 import java.util.Arrays;
 import java.util.Vector;
 
@@ -12,16 +14,13 @@ import java.util.Vector;
  *
  * @author User
  */
+@Getter
 public class AnswerCard extends CAHCard{
     private final Vector<String> answers;
     
     public AnswerCard(String... answers) {
         super(String.join(", ", answers));
         this.answers = new Vector<>(Arrays.asList(answers));
-    }
-    
-    public Vector<String> getAnswers(){
-        return answers;
     }
 
 }

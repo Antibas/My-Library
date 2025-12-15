@@ -8,6 +8,7 @@ package com.antibas.math.function;
 import com.antibas.math.Complex;
 import com.antibas.math.Number2;
 
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -21,7 +22,6 @@ public interface Function extends java.util.function.Function<Double, Double>{
     }
     
     default Function derivative(double h){
-        //ouble h = Double.MIN_NORMAL;
         return (x) -> (apply(x+h) - apply(x))/h;
     }
     
@@ -39,7 +39,7 @@ public interface Function extends java.util.function.Function<Double, Double>{
     default double integral(double a, double b){
         return integral(a, b, Number2.DX_DOUBLE);
     }
-    
+
     default double integral(double a, double b, double dx){
         if(a > b){
             double tmp = a;
@@ -83,23 +83,20 @@ public interface Function extends java.util.function.Function<Double, Double>{
     }
     
     default double limit(double l, char indicator){
-        switch(indicator){
-            case '-':
-              return apply(l - Number2.DX_DOUBLE);  
-            case '+':
-                return apply(l + Number2.DX_DOUBLE);
-            default:
-                throw new IllegalArgumentException(""+indicator);
-        }
+        return switch (indicator) {
+            case '-' -> apply(l - Number2.DX_DOUBLE);
+            case '+' -> apply(l + Number2.DX_DOUBLE);
+            default -> throw new IllegalArgumentException("" + indicator);
+        };
         
     }
     
-    default Complex[] solveForZero(){
+    default List<Complex> solveForZero(){
     	return solveForZero(Number2.R_DOUBLE);
     }
     
-    default Complex[] solveForZero(Domain domain){
-    	Vector<Complex> solutions = new Vector<>();
+    default List<Complex> solveForZero(Domain domain){
+        List<Complex> solutions = new Vector<>();
     	
     	double f;
     	for(double x = domain.getStart(); x <= domain.getEnd(); x += domain.getDx()) {
@@ -109,7 +106,7 @@ public interface Function extends java.util.function.Function<Double, Double>{
     		}
     	}
     	
-        return (Complex[]) solutions.toArray();
+        return solutions;
     }
     
     /*default Series fourierSeries(double f0) {

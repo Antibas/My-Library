@@ -36,11 +36,11 @@ public class Deck<T extends Card> extends CardCollection<T> {
     
     @Override
     public String toString(){
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for(Card c: this) {
-        	s += c.toString() + "\n";
+        	s.append(c.toString()).append("\n");
         }
-        return s;
+        return s.toString();
     }
     
     

@@ -158,17 +158,14 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(imaginary);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(real);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + Double.hashCode(imaginary);
+        result = prime * result + Double.hashCode(real);
 		return result;
 	}
 
 	@Override
 	public int compareTo(Complex o) {
-		return ((Double)(real)).compareTo(o.real) + ((Double)(imaginary)).compareTo(o.imaginary);
+		return Double.compare((real), o.real) + Double.compare((imaginary), o.imaginary);
 	}
 
 	@Override
@@ -218,13 +215,15 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Complex) {
-			Complex c = (Complex)obj;
-			return this.real == c.real && this.imaginary == c.imaginary;
+		if(obj instanceof Complex c) {
+            return this.real == c.real && this.imaginary == c.imaginary;
+		}
+
+		if(obj instanceof Double d) {
+            return this.real == d && this.imaginary == 0.0d;
 		}
 		
-		if(obj instanceof Double || obj instanceof Integer) {
-			Double d = (Double)obj;
+		if(obj instanceof Integer d) {
 			return this.real == d && this.imaginary == 0.0d;
 		}
 		
@@ -250,11 +249,11 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 					return new Complex(Double.parseDouble(value));
 				}
 				
-				if(value == "j" || value == "i") {
+				if(value.equals("j") || value.equals("i")) {
 					return new Complex(0, 1);
 				}
 				
-				if(value == "-j" || value == "-i") {
+				if(value.equals("-j") || value.equals("-i")) {
 					return new Complex(0, -1);
 				}
 				
@@ -263,9 +262,12 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 		}
 		
 		String r_str = value.substring(0, i_ind);
-		String i_str = value.substring(i_ind, value.length());
+		String i_str = value.substring(i_ind);
+
+		boolean r_str_check = r_str.endsWith("j") || r_str.endsWith("i"),
+				i_str_check = i_str.endsWith("j") || i_str.endsWith("i");
 		
-		if((r_str.endsWith("j") || r_str.endsWith("i")) && !(i_str.endsWith("j") || i_str.endsWith("i"))) {
+		if(r_str_check && !i_str_check) {
 			if(r_str.equals("j") || r_str.equals("i")) {
 				return new Complex(Double.parseDouble(i_str), 1);
 			}
@@ -277,7 +279,7 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 			return new Complex(Double.parseDouble(i_str), Double.parseDouble(r_str.substring(0, r_str.length()-1)));
 		}
 		
-		if(!(r_str.endsWith("j") || r_str.endsWith("i")) && (i_str.endsWith("j") || i_str.endsWith("i"))) {
+		if(!r_str_check && i_str_check) {
 			if(i_str.equals("j") || i_str.equals("i")) {
 				return new Complex(Double.parseDouble(r_str), 1);
 			}

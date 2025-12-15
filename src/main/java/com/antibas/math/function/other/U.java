@@ -28,7 +28,7 @@ public class U extends FunctionClass{
 
     @Override
 	public Double apply(Double t) {
-		return amplitude*((t >= t0)? 1.0d : 0.0d) + adder;
+		return super.apply((t >= t0)? 1.0d : 0.0d);
 	}
 
 	@Override

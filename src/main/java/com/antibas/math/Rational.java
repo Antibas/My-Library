@@ -3,17 +3,19 @@ package com.antibas.math;
 
 import lombok.Getter;
 
+import java.io.Serial;
+
 @Getter
 public class Rational extends Number2 {
 
 	/**
 	 * 
 	 */
+	@Serial
 	private static final long serialVersionUID = -4238905875594162213L;
 	private int numerator;
 	private int denominator;
-	
-	
+
 
 	public Rational(int numerator, int denominator) {
 		if(denominator <= 0 || numerator < 0) {
@@ -52,20 +54,18 @@ public class Rational extends Number2 {
 
 	@Override
 	public Rational add(Number2 o) {
-		if(o instanceof Rational) {
-			Rational oRational = (Rational)o;
+		if(o instanceof Rational oRational) {
 			if(this.denominator == oRational.denominator)
 				return new Rational(numerator+oRational.numerator, denominator);
 			
-			return new Rational((int) (numerator*oRational.denominator+oRational.numerator*denominator), denominator*oRational.denominator);
+			return new Rational(numerator*oRational.denominator+oRational.numerator*denominator, denominator*oRational.denominator);
 		}
 		return new Rational((int) (numerator+denominator*o.doubleValue()), denominator);
 	}
 
 	@Override
 	public Rational subtract(Number2 o) {
-		if(o instanceof Rational) {
-			Rational oRational = (Rational)o;
+		if(o instanceof Rational oRational) {
 			if(this.denominator == oRational.denominator)
 				return new Rational(numerator-oRational.numerator, denominator);
 			
@@ -76,8 +76,7 @@ public class Rational extends Number2 {
 
 	@Override
 	public Rational multiply(Number2 o) {
-		if(o instanceof Rational) {
-			Rational oRational = (Rational)o;
+		if(o instanceof Rational oRational) {
 			return new Rational(numerator*oRational.numerator, denominator*oRational.denominator);
 		}
 		return new Rational((int) (numerator*o.doubleValue()), this.denominator);
@@ -85,8 +84,7 @@ public class Rational extends Number2 {
 
 	@Override
 	public Rational divide(Number2 o) throws ArithmeticException {
-		if(o instanceof Rational) {
-			Rational oRational = (Rational)o;
+		if(o instanceof Rational oRational) {
 			return this.multiply(oRational.invert());
 		}
 		return this.multiply((Number2)(o.invert()));
