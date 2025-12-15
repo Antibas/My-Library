@@ -40,4 +40,9 @@ public abstract class Number2 extends Number implements Serializable{
 	
 	public abstract boolean isInfinite();
 	public abstract boolean isFinite();
+
+	public abstract boolean isPositive();
+	public boolean isNegative(){
+		return !isPositive();
+	}
 }

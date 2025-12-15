@@ -104,6 +104,11 @@ public final class Natural extends Number2 {
 	}
 
 	@Override
+	public boolean isPositive() {
+		return value > 0;
+	}
+
+	@Override
 	public int intValue() {
 		return (int) this.value;
 	}

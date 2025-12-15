@@ -309,4 +309,9 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 	public boolean isFinite() {
 		return !this.isInfinite();
 	}
+
+	@Override
+	public boolean isPositive() {
+		return this.real > 0 && this.imaginary > 0;
+	}
 }

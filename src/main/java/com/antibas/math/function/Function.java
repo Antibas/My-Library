@@ -11,6 +11,8 @@ import com.antibas.math.Number2;
 import java.util.List;
 import java.util.Vector;
 
+import static com.antibas.math.function.Indicator.*;
+
 /**
  *
  * @author User
@@ -40,33 +42,28 @@ public interface Function extends java.util.function.Function<Double, Double>{
         return integral(a, b, Number2.DX_DOUBLE);
     }
 
-    default double integral(double a, double b, double dx){
+    default double innerIntegral(double a, double b, double dx){
         if(a > b){
             double tmp = a;
             a = b;
             b = tmp;
         }
         double S = 0.0;
-        
+
         for(double i = a; i <= b; i += dx){
             S += apply(i + dx/2.0)*dx;
         }
-        
+
+        return S;
+    }
+
+    default double integral(double a, double b, double dx){
+        double S = innerIntegral(a, b, dx);
         return (a > b)? -S : S;
     }
     
     default Function integral(double a, double b, double dx, Function f){
-        if(a > b){
-            double tmp = a;
-            a = b;
-            b = tmp;
-        }
-        double S = 0.0;
-        
-        for(double i = a; i <= b; i += dx){
-            S += apply(i + dx/2.0)*dx;
-        }
-        
+        double S = innerIntegral(a, b, dx);
         return x -> 0.0d;
     }
     
@@ -79,16 +76,18 @@ public interface Function extends java.util.function.Function<Double, Double>{
     }
     
     default double limit(double l){
-        return apply(l-Number2.DX_DOUBLE);
+        return limit(l, MINUS);
     }
     
-    default double limit(double l, char indicator){
+    default double limit(double l, Indicator indicator){
         return switch (indicator) {
-            case '-' -> apply(l - Number2.DX_DOUBLE);
-            case '+' -> apply(l + Number2.DX_DOUBLE);
-            default -> throw new IllegalArgumentException("" + indicator);
+            case MINUS -> apply(l - Number2.DX_DOUBLE);
+            case PLUS -> apply(l + Number2.DX_DOUBLE);
         };
-        
+    }
+
+    default double limit(double l, char indicator){
+        return limit(l, Indicator.valueOf(String.valueOf(indicator)));
     }
     
     default List<Complex> solveForZero(){

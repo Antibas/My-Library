@@ -143,6 +143,11 @@ public class Rational extends Number2 {
 	}
 
 	@Override
+	public boolean isPositive() {
+		return this.doubleValue() > 0;
+	}
+
+	@Override
 	public int intValue() {
 		return numerator/denominator;
 	}
