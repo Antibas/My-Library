@@ -1,141 +1,130 @@
 package com.antibas.math.geometry.vector;
 
-import com.antibas.util.pair.NamedPair;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
 public class Vector2D {
-	protected double x1, y1;
-	protected double x2, y2;
-	
+	protected Point2D p1, p2;
+
 	public Vector2D(double x1, double y1, double x2, double y2) {
-		this.x1 = x1;
-		this.y1 = y1;
-		this.x2 = x2;
-		this.y2 = y2;
+		this.p1 = new Point2D(x1, y1);
+		this.p2 = new Point2D(x2, y2);
 	}
-	
-	public Vector2D(NamedPair<Double> namedPair1, NamedPair<Double> namedPair2) {
-		this(namedPair1.getFirst(), namedPair1.getSecond(), namedPair2.getFirst(), namedPair2.getSecond());
+
+	public Vector2D(Point2D p1, Point2D p2) {
+		this.p1 = p1;
+		this.p2 = p2;
 	}
-	
+
 	public Vector2D(double x2, double y2) {
 		this(0, 0, x2, y2);
 	}
-	
-	public Vector2D(NamedPair<Double> namedPair2) {
-		this(namedPair2.getFirst(), namedPair2.getSecond());
+
+	public Vector2D(Point2D p2) {
+		this(new Point2D(), p2);
 	}
-	
+
 	public Vector2D(Vector2D vector) {
-		this(vector.x1, vector.y1, vector.x2, vector.y2);
+		this(vector.p1, vector.p2);
 	}
-	
+
 	public Vector2D() {
 		this(0,0);
 	}
 
     public double getX() {
-		return x2-x1;
+		return p2.getX()-p1.getX();
 	}
 
 	public double getY() {
-		return y2-y1;
+		return p2.getY()-p1.getY();
 	}
-	
-	public Iterable<Double> getFirstPoint(){
-		return new NamedPair<>(x1, y1);
-	}
-	
-	public Iterable<Double> getSecondPoint(){
-		return new NamedPair<>(x2, y2);
-	}
-	
+
 	public double amplitude() {
 		return Math.sqrt(Math.pow(getX(), 2) + Math.pow(getY(), 2));
 	}
-	
+
 	public double angle() {
 		return Math.atan((getY())/(getX()));
 	}
-	
+
 	public boolean isCentered() {
-		return x1 == 0 && y1 == 0;
+		return p1.getX() == 0 && p1.getY() == 0;
 	}
-	
+
 	public Vector2D getCentered() {
 		return new Vector2D(getX(), getY());
 	}
-	
+
 	public Vector2D getInverse() {
-		return new Vector2D(x2, y2, x1, y1);
+		return new Vector2D(p2.getX(), p2.getY(), p1.getX(), p1.getY());
 	}
-	
+
 	public Vector2D getNormalized() {
-		return div(new Vector2D(x1, y1, x2, y2), this.amplitude());
+		return div(new Vector2D(p1.getX(), p1.getY(), p2.getX(), p2.getY()), this.amplitude());
 	}
-	
+
 	public static Vector2D add(Vector2D vector, double a) {
-		return new Vector2D(vector.x1+a, vector.x2+a, vector.y1+a, vector.y2+a);
+		return new Vector2D(vector.p1.getX()+a, vector.p2.getX()+a, vector.p1.getY()+a, vector.p2.getY()+a);
 	}
-	
+
 	public static Vector2D sub(Vector2D vector, double a) {
-		return new Vector2D(vector.x1-a, vector.x2-a, vector.y1-a, vector.y2-a);
+		return new Vector2D(vector.p1.getX()-a, vector.p2.getX()-a, vector.p1.getY()-a, vector.p2.getY()-a);
 	}
-	
+
 	public static Vector2D mul(Vector2D vector, double a) {
-		return new Vector2D(vector.x1*a, vector.x2*a, vector.y1*a, vector.y2*a);
+		return new Vector2D(vector.p1.getX()*a, vector.p2.getX()*a, vector.p1.getY()*a, vector.p2.getY()*a);
 	}
-	
+
 	public static Vector2D div(Vector2D vector, double a) {
-		return new Vector2D(vector.x1/a, vector.x2/a, vector.y1/a, vector.y2/a);
+		return new Vector2D(vector.p1.getX()/a, vector.p2.getX()/a, vector.p1.getY()/a, vector.p2.getY()/a);
 	}
 
 	public static Vector2D add(Vector2D vector1, Vector2D vector2) {
-		if(vector1.getFirstPoint().equals(vector2.getFirstPoint())) {
-			return new Vector2D(vector1.x1, vector1.y1, vector1.x2+vector2.x2, vector1.y2+vector2.y2);
+		if(vector1.getP1().equals(vector2.getP1())) {
+			return new Vector2D(vector1.p1.getX(), vector1.p1.getY(), vector1.p2.getX()+vector2.p2.getX(), vector1.p2.getY()+vector2.p2.getY());
 		}
-		if(vector1.getSecondPoint().equals(vector2.getFirstPoint())) {
-			return new Vector2D(vector1.x1, vector1.y1, vector2.x2, vector2.y2);
+		if(vector1.getP2().equals(vector2.getP2())) {
+			return new Vector2D(vector1.p1.getX(), vector1.p1.getY(), vector2.p2.getX(), vector2.p2.getY());
 		}
 		return null;
 	}
-	
+
 	public static Vector2D sub(Vector2D vector1, Vector2D vector2) {
 		return Vector2D.add(vector1, vector2.getInverse());
 	}
-	
+
 	public static double dot(Vector2D vector1, Vector2D vector2) {
 		return vector1.getX()*vector2.getX()+vector1.getY()*vector2.getY();
 	}
-	
+
 	public static boolean areOppositeDirection(Vector2D vector1, Vector2D vector2) {
 		return Vector2D.dot(vector1, vector2) == -vector1.amplitude()*vector2.amplitude();
 	}
-	
+
 	public static boolean areSameDirection(Vector2D vector1, Vector2D vector2) {
 		return Vector2D.dot(vector1, vector2) == vector1.amplitude()*vector2.amplitude();
 	}
-	
+
 	public static boolean areParallel(Vector2D vector1, Vector2D vector2) {
 		return Vector2D.areOppositeDirection(vector1, vector2) ||
 			   Vector2D.areSameDirection(vector1, vector2);
 	}
-	
+
 	public static boolean areVertical(Vector2D vector1, Vector2D vector2) {
 		return Vector2D.dot(vector1, vector2) == 0;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-        result = prime * result + Double.hashCode(x1);
-        result = prime * result + Double.hashCode(x2);
-        result = prime * result + Double.hashCode(y1);
-        result = prime * result + Double.hashCode(y2);
+        result = prime * result + Double.hashCode(p1.getX());
+        result = prime * result + Double.hashCode(p2.getX());
+        result = prime * result + Double.hashCode(p1.getY());
+        result = prime * result + Double.hashCode(p2.getY());
 		return result;
 	}
 
@@ -148,21 +137,21 @@ public class Vector2D {
 		if (getClass() != obj.getClass())
 			return false;
 		Vector2D other = (Vector2D) obj;
-		if (Double.doubleToLongBits(x1) != Double.doubleToLongBits(other.x1))
+		if (Double.doubleToLongBits(p1.getX()) != Double.doubleToLongBits(other.p1.getX()))
 			return false;
-		if (Double.doubleToLongBits(x2) != Double.doubleToLongBits(other.x2))
+		if (Double.doubleToLongBits(p2.getX()) != Double.doubleToLongBits(other.p2.getX()))
 			return false;
-		if (Double.doubleToLongBits(y1) != Double.doubleToLongBits(other.y1))
+		if (Double.doubleToLongBits(p1.getY()) != Double.doubleToLongBits(other.p1.getY()))
 			return false;
-        return Double.doubleToLongBits(y2) == Double.doubleToLongBits(other.y2);
+        return Double.doubleToLongBits(p2.getY()) == Double.doubleToLongBits(other.p2.getY());
     }
-	
+
 	@Override
 	public String toString() {
 		if(this.isCentered()) {
-			return "(" + x2 + ", " + y2 + ")";
+			return "(" + p2.getX() + ", " + p2.getY() + ")";
 		}
-		return "(" + x1 + ", " + y1 + ") -> (" + x2 + ", " + y2 + ")";
+		return "(" + p1.getX() + ", " + p1.getY() + ") -> (" + p2.getX() + ", " + p2.getY() + ")";
 	}
 	
 	

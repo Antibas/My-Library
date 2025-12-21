@@ -1,8 +1,15 @@
 package com.antibas.math.geometry.polygon.triangle;
 
+import com.antibas.math.geometry.vector.Point;
+import com.antibas.math.geometry.vector.Point2D;
+
 public class IsoscelesTriangle extends Triangle{
     public IsoscelesTriangle(double baseAngles, double topAngle, double base, double equalSides) {
         super(baseAngles, topAngle, baseAngles, equalSides, base, equalSides);
+    }
+
+    public IsoscelesTriangle(Point center, double baseAngles, double topAngle, double base, double equalSides) {
+        super(center, baseAngles, topAngle, baseAngles, equalSides, base, equalSides);
     }
 
     @Override

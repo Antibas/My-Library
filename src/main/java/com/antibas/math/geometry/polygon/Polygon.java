@@ -1,18 +1,26 @@
 package com.antibas.math.geometry.polygon;
 
 import com.antibas.math.geometry.Shape;
+import com.antibas.math.geometry.vector.Point;
+import com.antibas.math.geometry.vector.Point2D;
+import com.antibas.math.geometry.vector.Point3D;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-public abstract class Polygon implements Shape {
+public abstract class Polygon extends Shape {
     protected final Double[] angles, sides;
 
-    public Polygon(int size, Collection<Double> angles, Collection<Double> sides) {
+    public Polygon(Point center, int size, Collection<Double> angles, Collection<Double> sides) {
+        super(center);
         if(angles.size() != size)
             throw new IllegalArgumentException();
         this.angles = angles.toArray(new Double[0]);
         this.sides = sides.toArray(new Double[0]);
+    }
+
+    public Polygon(int size, Collection<Double> angles, Collection<Double> sides) {
+        this(new Point3D(), size, angles, sides);
     }
 
     public double getAngle(int i){

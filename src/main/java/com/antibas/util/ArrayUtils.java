@@ -148,9 +148,7 @@ public final class ArrayUtils {
 	}
 	
 	public static int[] onesInt(int n) {
-		int[] z = new int[n];
-        Arrays.fill(z, 1);
-		return z;
+		return fillInt(n, 1);
 	}
 	
 	public static int[][] onesInt(int n, int m) {
@@ -160,6 +158,18 @@ public final class ArrayUtils {
 				z[i][j] = 1;
 			}
 		}
+		return z;
+	}
+
+	public static int[] fillInt(int n, int v) {
+		int[] z = new int[n];
+		Arrays.fill(z, v);
+		return z;
+	}
+
+	public static double[] fillDouble(int n, double v) {
+		double[] z = new double[n];
+		Arrays.fill(z, v);
 		return z;
 	}
 	

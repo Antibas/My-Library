@@ -1,12 +1,19 @@
 package com.antibas.math.geometry.polygon;
 
+import com.antibas.math.geometry.vector.Point;
+import com.antibas.math.geometry.vector.Point2D;
+
 import java.util.Arrays;
 import java.util.Collection;
 
 public abstract class ConvexPolygon extends Polygon{
-    public ConvexPolygon(int size, Collection<Double> angles, Collection<Double> sides) {
-        super(size, angles, sides);
+    public ConvexPolygon(Point center, int size, Collection<Double> angles, Collection<Double> sides) {
+        super(center, size, angles, sides);
         this.validate();
+    }
+
+    public ConvexPolygon(int size, Collection<Double> angles, Collection<Double> sides) {
+        this(new Point2D(), size, angles, sides);
     }
 
     @Override

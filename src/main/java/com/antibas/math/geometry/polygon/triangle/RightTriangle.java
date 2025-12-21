@@ -1,10 +1,17 @@
 package com.antibas.math.geometry.polygon.triangle;
 
+import com.antibas.math.geometry.vector.Point;
+import com.antibas.math.geometry.vector.Point2D;
+
 public class RightTriangle extends Triangle{
 
 
     public RightTriangle(double angleA, double angleB, double A, double B, double C) {
         super(angleA, angleB, 90, A, B, C);
+    }
+
+    public RightTriangle(Point center, double angleA, double angleB, double A, double B, double C) {
+        super(center, angleA, angleB, 90, A, B, C);
     }
 
     @Override

@@ -9,33 +9,33 @@ import java.util.List;
 @Setter
 @Getter
 public class Vector3D extends Vector2D {
-	protected double z1;
-	protected double z2;
 	public Vector3D() {
-		super();
-		this.z1 = 0;
-		this.z2 = 0;
+		this(0,0,0,0,0,0);
 	}
 	public Vector3D(double x1, double y1, double z1, double x2, double y2, double z2) {
-		super(x1, y1, x2, y2);
-		this.z1 = z1;
-		this.z2 = z2;
+		this.p1 = new Point3D(x1, y1, z1);
+		this.p2 = new Point3D(x2, y2, z2);
 	}
+
 	public Vector3D(double x2, double y2, double z2) {
-		super(x2, y2);
-		this.z1 = 0;
-		this.z2 = z2;
+		this(0, 0, 0, x2, y2, z2);
 	}
+
 	public Vector3D(Vector3D vector) {
-		super(vector);
-		this.z1 = vector.z1;
-		this.z2 = vector.z2;
+		this(vector,
+				vector.getP1().getZ(),
+				vector.getP2().getZ()
+		);
 	}
 	
 	public Vector3D(Vector2D vector, double z1, double z2) {
-		super(vector);
-		this.z1 = z1;
-		this.z2 = z2;
+		this(vector.getP1().getX(),
+				vector.getP1().getY(),
+				z1,
+				vector.getP2().getX(),
+				vector.getP2().getY(),
+				z2
+		);
 	}
 	
 	public Vector3D(Vector2D vector, double z2) {
@@ -47,42 +47,34 @@ public class Vector3D extends Vector2D {
 	}
 
     public double getZ() {
-		return z2-z1;
+		return getP2().getZ()-getP1().getZ();
 	}
-	
+
 	@Override
-	public Iterable<Double> getFirstPoint() {
-		List<Double> l = new ArrayList<>();
-		for(double d: super.getFirstPoint()) {
-			l.add(d);
-		}
-		l.add(z1);
-		return l;
+	public Point3D getP1() {
+		return (Point3D)super.getP1();
 	}
+
 	@Override
-	public Iterable<Double> getSecondPoint() {
-		List<Double> l = new ArrayList<>();
-		for(double d: super.getSecondPoint()) {
-			l.add(d);
-		}
-		l.add(z2);
-		return l;
+	public Point3D getP2() {
+		return (Point3D)super.getP2();
 	}
+
 	@Override
 	public double amplitude() {
 		return Math.sqrt(Math.pow(getX(), 2) + Math.pow(getY(), 2) + Math.pow(getZ(), 2));
 	}
 	@Override
 	public boolean isCentered() {
-		return super.isCentered() && z1 == 0;
+		return super.isCentered() && getP1().getZ() == 0;
 	}
 	@Override
 	public Vector3D getCentered() {
-		return new Vector3D(super.getCentered(), z2-z1);
+		return new Vector3D(super.getCentered(), getP2().getZ()-getP1().getZ());
 	}
 	@Override
 	public Vector3D getInverse() {
-		return new Vector3D(super.getInverse(), z2, z1);
+		return new Vector3D(super.getInverse(), getP2().getZ(), getP1().getZ());
 	}
 	@Override
 	public Vector3D getNormalized() {
@@ -92,8 +84,8 @@ public class Vector3D extends Vector2D {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-        result = prime * result + Double.hashCode(z1);
-        result = prime * result + Double.hashCode(z2);
+        result = prime * result + Double.hashCode(getP1().getZ());
+        result = prime * result + Double.hashCode(getP2().getZ());
 		return result;
 	}
 	
@@ -106,9 +98,9 @@ public class Vector3D extends Vector2D {
 		if (getClass() != obj.getClass())
 			return false;
 		Vector3D other = (Vector3D) obj;
-		if (Double.doubleToLongBits(z1) != Double.doubleToLongBits(other.z1))
+		if (Double.doubleToLongBits(getP1().getZ()) != Double.doubleToLongBits(other.getP1().getZ()))
 			return false;
-		if (Double.doubleToLongBits(z2) != Double.doubleToLongBits(other.z2))
+		if (Double.doubleToLongBits(getP2().getZ()) != Double.doubleToLongBits(other.getP2().getZ()))
 			return false;
 		return super.equals(obj);
 	}
@@ -116,9 +108,9 @@ public class Vector3D extends Vector2D {
 	@Override
 	public String toString() {
 		if(this.isCentered()) {
-			return "(" + x2 + ", " + y2 + ", " + z2 + ")";
+			return "(" + getP2().getX() + ", " + getP2().getY() + ", " + getP2().getZ() + ")";
 		}
-		return "(" + x1 + ", " + y1 + ", " + z1  + ") -> (" + x2 + ", " + y2 + ", " + z2 + ")";
+		return "(" + getP1().getZ() + ", " + getP1().getY() + ", " + getP1().getZ()  + ") -> (" + getP2().getX() + ", " + getP2().getY() + ", " + getP2().getZ() + ")";
 	}
 	
 	public static Vector3D det(Vector3D vector1, Vector3D vector2) {

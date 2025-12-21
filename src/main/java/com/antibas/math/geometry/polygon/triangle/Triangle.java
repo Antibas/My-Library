@@ -2,6 +2,8 @@ package com.antibas.math.geometry.polygon.triangle;
 
 import com.antibas.math.geometry.polygon.ConvexPolygon;
 import com.antibas.math.geometry.polygon.Polygon;
+import com.antibas.math.geometry.vector.Point;
+import com.antibas.math.geometry.vector.Point2D;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +17,10 @@ public abstract class Triangle extends ConvexPolygon {
 
     public Triangle(double angleA, double angleB, double angleC, double A, double B, double C) {
         super(3, List.of(angleA, angleB, angleC), List.of(A, B, C));
+    }
+
+    public Triangle(Point center, double angleA, double angleB, double angleC, double A, double B, double C) {
+        super(center, 3, List.of(angleA, angleB, angleC), List.of(A, B, C));
     }
 
     @Override

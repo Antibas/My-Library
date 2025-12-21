@@ -1,6 +1,8 @@
 package com.antibas.math.geometry.polygon.trapezoid;
 
 import com.antibas.math.geometry.polygon.ConvexPolygon;
+import com.antibas.math.geometry.vector.Point;
+import com.antibas.math.geometry.vector.Point2D;
 
 import java.util.Collection;
 import java.util.List;
@@ -11,6 +13,10 @@ public class Trapezoid extends ConvexPolygon {
 
     public Trapezoid(double baseAngle1, double baseAngle2, double A, double B, double C, double D) {
         super(4, List.of(baseAngle1, 180-baseAngle1, baseAngle2, 180-baseAngle2), List.of(A, B, C, D));
+    }
+
+    public Trapezoid(Point center, double baseAngle1, double baseAngle2, double A, double B, double C, double D) {
+        super(center,4, List.of(baseAngle1, 180-baseAngle1, baseAngle2, 180-baseAngle2), List.of(A, B, C, D));
     }
 
     @Override

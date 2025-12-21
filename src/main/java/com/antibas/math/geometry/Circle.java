@@ -1,12 +1,19 @@
 package com.antibas.math.geometry;
 
+import com.antibas.math.geometry.vector.Point;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Circle implements Shape{
+public class Circle extends Shape{
     private double radius;
+
+    public Circle(Point center, double radius){
+        super(center);
+        this.radius = radius;
+        this.validate();
+    }
 
     public Circle(double radius){
         this.radius = radius;
