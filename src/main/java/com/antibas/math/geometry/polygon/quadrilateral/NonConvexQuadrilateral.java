@@ -8,6 +8,5 @@ import java.util.List;
 public abstract class NonConvexQuadrilateral extends NonConvexPolygon {
     public NonConvexQuadrilateral(double angleA, double angleB, double angleC, double angleD, double A, double B, double C, double D) {
         super(4, List.of(angleA, angleB, angleC, angleD), List.of(A, B, C, D));
-        this.validate();
     }
 }

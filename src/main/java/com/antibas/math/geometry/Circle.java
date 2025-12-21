@@ -10,6 +10,7 @@ public class Circle implements Shape{
 
     public Circle(double radius){
         this.radius = radius;
+        this.validate();
     }
 
     @Override
@@ -18,7 +19,13 @@ public class Circle implements Shape{
     }
 
     @Override
-    public void validate() {
+    public double getLength() {
+        return 2*Math.PI*radius;
+    }
 
+    @Override
+    public void validate() {
+        if(this.radius <= 0)
+            throw new IllegalArgumentException();
     }
 }

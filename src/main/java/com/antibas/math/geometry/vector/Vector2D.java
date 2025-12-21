@@ -1,4 +1,4 @@
-package com.antibas.math.vector;
+package com.antibas.math.geometry.vector;
 
 import com.antibas.util.pair.NamedPair;
 import lombok.Getter;

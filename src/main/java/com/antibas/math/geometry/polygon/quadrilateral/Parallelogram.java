@@ -13,6 +13,7 @@ public class Parallelogram extends ConvexQuadrilateral{
     public double getHeight(){
         return 0;
     }
+
     public double getBase() {
         return this.getSide(BIndex);
     }

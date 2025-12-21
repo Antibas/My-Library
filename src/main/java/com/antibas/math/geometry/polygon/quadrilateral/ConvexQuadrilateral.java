@@ -10,16 +10,15 @@ public abstract class ConvexQuadrilateral extends ConvexPolygon {
 
     public ConvexQuadrilateral(double angleA, double angleB, double angleC, double angleD, double A, double B, double C, double D) {
         super(4, List.of(angleA, angleB, angleC, angleD), List.of(A, B, C, D));
-        this.validate();
     }
 
-    public void validate(){
-        if(this.getAngle(angleAIndex) <= 0 || this.getAngle(angleBIndex) <= 0|| this.getAngle(angleCIndex) <= 0 || this.getAngle(angleDIndex) <= 0 ||
-                this.getSide(AIndex) <= 0 || this.getSide(BIndex) <= 0|| this.getSide(CIndex) <= 0|| this.getSide(DIndex) <= 0)
-            throw new IllegalArgumentException("Negative value");
-        if(this.getAngle(angleAIndex)  + this.getAngle(angleBIndex)  + this.getAngle(angleCIndex) +  this.getAngle(angleDIndex) != 360)
-            throw new IllegalArgumentException("Angles a, b, c and d must sum up to 360 d");
-    }
+//    public void validate(){
+//        if(this.getAngle(angleAIndex) <= 0 || this.getAngle(angleBIndex) <= 0|| this.getAngle(angleCIndex) <= 0 || this.getAngle(angleDIndex) <= 0 ||
+//                this.getSide(AIndex) <= 0 || this.getSide(BIndex) <= 0|| this.getSide(CIndex) <= 0|| this.getSide(DIndex) <= 0)
+//            throw new IllegalArgumentException("Negative value");
+//        if(this.getAngle(angleAIndex)  + this.getAngle(angleBIndex)  + this.getAngle(angleCIndex) +  this.getAngle(angleDIndex) != 360)
+//            throw new IllegalArgumentException("Angles a, b, c and d must sum up to 360 d");
+//    }
 
 
 }
