@@ -64,15 +64,8 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      * @param n the fill value
      */
     public Matrix(int r, int c, double n){
-//    	if(r<=0 && c<=0)   throw new IllegalArgumentException("Invalid Input Size: " + r + "X" + c);
-//    	if(r<=0) throw new IllegalArgumentException("Invalid Row Size: " + r);
-//    	if(c<=0) throw new IllegalArgumentException("Invalid Column Size: " + c);
         this.validate(r, c, false);
-        
-    	//rows = r;
-        //columns = c;
         elements = new double[r][c];
-        
         this.fill(n);
     }
     
@@ -233,7 +226,7 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      * 
      * @return s
      */
-    public boolean isOrthogonial(){
+    public boolean isOrthogonal(){
         return getRows() == getColumns();
     }
     
@@ -615,7 +608,7 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      */
     public void toI() throws EmptyMatrixException, NoOrthogonialMatrixException{
         if(isEmpty()) throw new EmptyMatrixException();
-        if(!isOrthogonial()) throw new NoOrthogonialMatrixException();
+        if(!isOrthogonal()) throw new NoOrthogonialMatrixException();
 //        for(int r = 0; r < rows(); r++){
 //            for(int c = 0; c < columns(); c++){
 //                elements[r][c] = (r==c)? 1.0 : 0.0;
@@ -689,7 +682,7 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      */
     public double trace() throws NoOrthogonialMatrixException{
     	if(isEmpty()) throw new EmptyMatrixException();
-        if(!isOrthogonial()) throw new NoOrthogonialMatrixException();
+        if(!isOrthogonal()) throw new NoOrthogonialMatrixException();
         double S = 0;
         for(int rc = 0; rc < getRows(); rc++){
             S += elements[rc][rc];
@@ -740,7 +733,7 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      */
     public double det() throws NoOrthogonialMatrixException, CannotOperateException{
     	if(isEmpty()) throw new EmptyMatrixException();
-        if (!isOrthogonial()) throw new NoOrthogonialMatrixException();
+        if (!isOrthogonal()) throw new NoOrthogonialMatrixException();
         if (isSingle()) throw new CannotOperateException(); 
         if (getRows() == 2 && getColumns() == 2) return elements[0][0]*elements[1][1] - elements[0][1]*elements[1][0];
         //return submatrix(Math2.RNG(1, rows), Math2.RNG(1, columns)).det();

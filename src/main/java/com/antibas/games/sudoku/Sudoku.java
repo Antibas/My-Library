@@ -13,7 +13,7 @@ public class Sudoku {
 	private final Matrix grid;
 	
 	public Sudoku(Matrix grid) {
-		if(!grid.isOrthogonial()) {
+		if(!grid.isOrthogonal()) {
 			throw new IllegalArgumentException();
 		}
 		this.grid = grid;
