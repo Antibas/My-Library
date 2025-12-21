@@ -5,13 +5,18 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.lang.constant.Constable;
+import java.lang.constant.ConstantDesc;
+import java.lang.invoke.MethodHandles;
 import java.util.Comparator;
+import java.util.Optional;
 
 @Setter
 @Getter
-public final class Complex extends Number2 implements Comparator<Complex>, Comparable<Complex>, Serializable{
+public final class Complex extends Number2 implements Comparable<Complex>, Serializable{
 	public static final Complex MAX_VALUE = new Complex(Double.MAX_VALUE, Double.MAX_VALUE);
 	public static final Complex MIN_VALUE = new Complex(Double.MIN_VALUE, Double.MIN_VALUE);
+	public static final Complex DX_COMPLEX = Complex.MIN_VALUE;
 	public static final Complex POSITIVE_INFINITY = new Complex(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
 	public static final Complex NEGATIVE_INFINITY = new Complex(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY);
 	public static final Complex NaN = new Complex(Double.NaN, Double.NaN);
@@ -113,10 +118,11 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 	public Complex divide(Complex com) {
 		double a = real, b = imaginary, c = com.real, d = com.imaginary;
 		double e = Math.pow(c, 2) - Math.pow(d, 2);
+		Complex ret = new Complex(a*c + b*d, b*c - a*d);
 		if(e == 0.0) {
-			return (new Complex(a*c + b*d, b*c - a*d)).multiply(Double.POSITIVE_INFINITY);
+			return ret.multiply(Double.POSITIVE_INFINITY);
 		}
-		return (new Complex(a*c + b*d, b*c - a*d)).divide(e);
+		return ret.divide(e);
 	}
 	
 	@Override
@@ -146,8 +152,7 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 	
 	@Override
 	public String toString() {
-		if(imaginary >= 0.0d) return real + "+" + imaginary + "j";
-		return real + "-" + Math.abs(imaginary) + "j";
+		return real + (imaginary >= 0.0d?"+":"-") + Math.abs(imaginary) + "j";
 	}
 	
 	public String toPolarString() {
@@ -165,7 +170,10 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 
 	@Override
 	public int compareTo(Complex o) {
-		return Double.compare((real), o.real) + Double.compare((imaginary), o.imaginary);
+		int c = Double.compare((real), o.real) + Double.compare((imaginary), o.imaginary);
+		if(c == 2) return 1;
+		if(c == -2) return -1;
+		return c;
 	}
 
 	@Override
@@ -241,9 +249,8 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 	}
 	
 	public static Complex parseComplex(String value) {
-		int i_ind;// = value.indexOf('-', 1);
+		int i_ind;
 		if((i_ind = value.indexOf('-', 1)) == -1) {
-//			i_ind = value.indexOf('+', 1);
 			if((i_ind = value.indexOf('+', 1)) == -1) {
 				if(!value.endsWith("j") && !value.endsWith("i")) {
 					return new Complex(Double.parseDouble(value));
@@ -266,48 +273,34 @@ public final class Complex extends Number2 implements Comparator<Complex>, Compa
 
 		boolean r_str_check = r_str.endsWith("j") || r_str.endsWith("i"),
 				i_str_check = i_str.endsWith("j") || i_str.endsWith("i");
-		
+
 		if(r_str_check && !i_str_check) {
-			if(r_str.equals("j") || r_str.equals("i")) {
-				return new Complex(Double.parseDouble(i_str), 1);
-			}
-			
-			if(r_str.equals("-j") || r_str.equals("-i")) {
-				return new Complex(Double.parseDouble(i_str), -1);
-			}
-			
-			return new Complex(Double.parseDouble(i_str), Double.parseDouble(r_str.substring(0, r_str.length()-1)));
+			return parseComplex(r_str, i_str);
 		}
 		
 		if(!r_str_check && i_str_check) {
-			if(i_str.equals("j") || i_str.equals("i")) {
-				return new Complex(Double.parseDouble(r_str), 1);
-			}
-			
-			if(i_str.equals("-j") || i_str.equals("-i")){
-				return new Complex(Double.parseDouble(r_str), -1);
-			}
-			
-			return new Complex(Double.parseDouble(r_str), Double.parseDouble(i_str.substring(0, i_str.length()-1)));
+			return parseComplex(i_str, r_str);
 		}
 		
 		throw new NumberFormatException();
 	}
 
-	@Override
-	public int compare(Complex o1, Complex o2) {
-		return o1.compareTo(o2);
+	private static Complex parseComplex(String r_str, String i_str){
+		if(r_str.equals("j") || r_str.equals("i")) {
+			return new Complex(Double.parseDouble(i_str), 1);
+		}
+
+		if(r_str.equals("-j") || r_str.equals("-i")) {
+			return new Complex(Double.parseDouble(i_str), -1);
+		}
+
+		return new Complex(Double.parseDouble(i_str), Double.parseDouble(r_str.substring(0, r_str.length()-1)));
 	}
 
 	@Override
 	public boolean isInfinite() {
 		return this.real == Double.POSITIVE_INFINITY || this.real == Double.NEGATIVE_INFINITY ||
 			   this.imaginary == Double.POSITIVE_INFINITY || this.imaginary == Double.NEGATIVE_INFINITY;
-	}
-
-	@Override
-	public boolean isFinite() {
-		return !this.isInfinite();
 	}
 
 	@Override

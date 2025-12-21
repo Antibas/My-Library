@@ -14,7 +14,6 @@ public abstract class Number2 extends Number implements Serializable{
 	private static final long serialVersionUID = 3519438330121793034L;
 	public static final double DX_DOUBLE = Double.MIN_NORMAL;
 	public static final double DX_INT = 1;
-	public static final Complex DX_COMPLEX = Complex.MIN_VALUE;
     public static final Domain R_DOUBLE = new Domain();
     public static final Domain R_PLUS_DOUBLE = new Domain(0.0, Double.POSITIVE_INFINITY);
     public static final Domain R_MINUS_DOUBLE = new Domain(0.0, true);
@@ -39,7 +38,9 @@ public abstract class Number2 extends Number implements Serializable{
 	public abstract boolean notEquals(Number2 o);
 	
 	public abstract boolean isInfinite();
-	public abstract boolean isFinite();
+	public boolean isFinite() {
+		return !this.isInfinite();
+	}
 
 	public abstract boolean isPositive();
 	public boolean isNegative(){

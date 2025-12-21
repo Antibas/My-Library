@@ -10,7 +10,7 @@ import com.antibas.io.FileIO;
 import com.antibas.math.CannotOperateException;
 import com.antibas.math.Number2;
 import com.antibas.math.matrix.EmptyMatrixException;
-import com.antibas.math.matrix.NoOrthogonialMatrixException;
+import com.antibas.math.matrix.NoOrthogonalMatrixException;
 
 import java.io.File;
 import java.io.IOException;
@@ -447,7 +447,7 @@ public class Matrix<T> implements Serializable, Collection<T>, Comparable<Matrix
     /**
      * Makes the matrix as the I matrix.
      * @throws NullMatrixException
-     * @throws NoOrthogonialMatrixException
+     * @throws NoOrthogonalMatrixException
      */
     /*public void toI() throws NullMatrixException, NoOrthogonialMatrixException{
         if(isEmpty()) throw new NullMatrixException();
@@ -461,7 +461,7 @@ public class Matrix<T> implements Serializable, Collection<T>, Comparable<Matrix
     
     /**
      * @throws NullMatrixException
-     * @throws NoOrthogonialMatrixException
+     * @throws NoOrthogonalMatrixException
      * @deprecated use static toI(int rc);
      * @see makeI()
      * @return the matrix as an I
@@ -515,7 +515,7 @@ public class Matrix<T> implements Serializable, Collection<T>, Comparable<Matrix
     /**
      * 
      * @return the determinate of the matrix 
-     * @throws NoOrthogonialMatrixException 
+     * @throws NoOrthogonalMatrixException
      * @throws CannotOperateException 
      */
     /*public double det() throws NoOrthogonialMatrixException, CannotOperateException{

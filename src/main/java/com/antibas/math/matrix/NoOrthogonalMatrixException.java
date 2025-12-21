@@ -9,9 +9,9 @@ package com.antibas.math.matrix;
  *
  * @author User
  */
-public class NoOrthogonialMatrixException extends RuntimeException {
+public class NoOrthogonalMatrixException extends RuntimeException {
 
-    public NoOrthogonialMatrixException() {
+    public NoOrthogonalMatrixException() {
     }
     
 }

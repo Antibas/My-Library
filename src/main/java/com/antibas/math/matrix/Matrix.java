@@ -217,9 +217,9 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
 
     private void validate(int r, int c, boolean checkEmpty) {
         if(isEmpty() && checkEmpty) throw new EmptyMatrixException();
-        if((r> getRows() || r<0) && (c> getColumns() || c<0)) throw new IndexOutOfBoundsException("Indices " + r + " and " + c + " are invalid for size " + getRows() + "X" + getColumns());
-        if(r> getRows() || r<0) throw new IndexOutOfBoundsException("Index " + r + " is invalid for row size " + getRows());
-        if(c> getColumns() || c<0) throw new IndexOutOfBoundsException("Index " + c + " is invalid for column size " + getColumns());
+        if((r<0) && (c<0)) throw new IndexOutOfBoundsException("Indices " + r + " and " + c + " are invalid");
+        if(r<0) throw new IndexOutOfBoundsException("Index " + r + " is invalid for row size " + getRows());
+        if(c<0) throw new IndexOutOfBoundsException("Index " + c + " is invalid for column size " + getColumns());
     }
 
     /**
@@ -604,11 +604,11 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     /**
      * Makes the matrix as the I matrix.
      * @throws EmptyMatrixException s
-     * @throws NoOrthogonialMatrixException s
+     * @throws NoOrthogonalMatrixException s
      */
-    public void toI() throws EmptyMatrixException, NoOrthogonialMatrixException{
+    public void toI() throws EmptyMatrixException, NoOrthogonalMatrixException {
         if(isEmpty()) throw new EmptyMatrixException();
-        if(!isOrthogonal()) throw new NoOrthogonialMatrixException();
+        if(!isOrthogonal()) throw new NoOrthogonalMatrixException();
 //        for(int r = 0; r < rows(); r++){
 //            for(int c = 0; c < columns(); c++){
 //                elements[r][c] = (r==c)? 1.0 : 0.0;
@@ -678,11 +678,11 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     /**
      * 
      * @return the trace of the matrix 
-     * @throws NoOrthogonialMatrixException s
+     * @throws NoOrthogonalMatrixException s
      */
-    public double trace() throws NoOrthogonialMatrixException{
+    public double trace() throws NoOrthogonalMatrixException {
     	if(isEmpty()) throw new EmptyMatrixException();
-        if(!isOrthogonal()) throw new NoOrthogonialMatrixException();
+        if(!isOrthogonal()) throw new NoOrthogonalMatrixException();
         double S = 0;
         for(int rc = 0; rc < getRows(); rc++){
             S += elements[rc][rc];
@@ -728,12 +728,12 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
     /**
      * 
      * @return the determinate of the matrix 
-     * @throws NoOrthogonialMatrixException s
+     * @throws NoOrthogonalMatrixException s
      * @throws CannotOperateException s
      */
-    public double det() throws NoOrthogonialMatrixException, CannotOperateException{
+    public double det() throws NoOrthogonalMatrixException, CannotOperateException{
     	if(isEmpty()) throw new EmptyMatrixException();
-        if (!isOrthogonal()) throw new NoOrthogonialMatrixException();
+        if (!isOrthogonal()) throw new NoOrthogonalMatrixException();
         if (isSingle()) throw new CannotOperateException(); 
         if (getRows() == 2 && getColumns() == 2) return elements[0][0]*elements[1][1] - elements[0][1]*elements[1][0];
         //return submatrix(Math2.RNG(1, rows), Math2.RNG(1, columns)).det();
@@ -886,9 +886,9 @@ public class Matrix implements Serializable, Collection<Double>, Comparable<Matr
      * @param rc for rows and columns
      * @return an rcXrc I matrix
      * @throws EmptyMatrixException A
-     * @throws NoOrthogonialMatrixException A
+     * @throws NoOrthogonalMatrixException A
      */
-    public static Matrix I(int rc) throws EmptyMatrixException, NoOrthogonialMatrixException{
+    public static Matrix I(int rc) throws EmptyMatrixException, NoOrthogonalMatrixException {
         if(rc<0) throw new IllegalArgumentException();
         Matrix ret = new Matrix(rc, rc);
         ret.toI();
