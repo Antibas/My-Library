@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Map;
 
 @Setter
 @Getter
@@ -32,12 +33,11 @@ public class Pair<V1, V2> implements Serializable{
 		return result;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Pair) {
-			return first.equals(((Pair<V1, V2>) obj).first) &&
-				   second.equals(((Pair<V1, V2>) obj).second);
+		if(obj instanceof Pair<?,?> pair) {
+			return first.equals(pair.first) &&
+				   second.equals(pair.second);
 		}
 		return false;
 	}

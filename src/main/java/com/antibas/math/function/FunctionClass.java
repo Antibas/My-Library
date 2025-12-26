@@ -35,9 +35,8 @@ public abstract class FunctionClass implements Function{
 		this(1.0d, 0.0d);
 	}
 
-    public FunctionClass add(FunctionClass f) {
-		Function r = x -> this.apply(x) + f.apply(x); 
-		return (FunctionClass)r;
+    public Function add(Function f) {
+        return x -> this.apply(x) + f.apply(x);
 	}
 
 	@Override

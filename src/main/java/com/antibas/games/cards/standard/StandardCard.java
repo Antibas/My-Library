@@ -68,8 +68,8 @@ public class StandardCard extends Card {
     
     @Override
     public boolean equals(Object c){
-        if(!(c instanceof StandardCard)) return false;
-        return ((StandardCard)c).suit == suit && ((StandardCard)c).number == number;
+        if(!(c instanceof StandardCard card)) return false;
+        return card.suit == suit && card.number == number;
     }
 
     @Override

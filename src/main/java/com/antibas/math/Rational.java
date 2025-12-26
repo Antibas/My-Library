@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.io.Serial;
 
 @Getter
-public class Rational extends Number2 {
+public final class Rational extends Number2 implements Comparable<Rational>{
 
 	/**
 	 * 
@@ -173,4 +173,8 @@ public class Rational extends Number2 {
 		return null;
 	}
 
+	@Override
+	public int compareTo(Rational o) {
+		return Double.compare(this.doubleValue(), o.doubleValue());
+	}
 }

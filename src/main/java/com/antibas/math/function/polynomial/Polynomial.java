@@ -5,6 +5,7 @@
  */
 package com.antibas.math.function.polynomial;
 
+import com.antibas.math.function.Function;
 import com.antibas.math.function.FunctionClass;
 import com.antibas.util.ArrayUtils;
 import lombok.Getter;
@@ -156,7 +157,7 @@ public class Polynomial extends FunctionClass{
     }
     
     @Override
-    public Polynomial add(FunctionClass f) {
+    public Polynomial add(Function f) {
     	Polynomial p = (Polynomial)f;
     	Polynomial pmax = new Polynomial(power >= p.power? this: p);
     	Polynomial pmin = new Polynomial(power < p.power? this: p);

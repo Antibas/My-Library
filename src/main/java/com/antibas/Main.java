@@ -1,6 +1,10 @@
 package com.antibas;
-import com.antibas.parser.query.QueryParser;
-import com.antibas.parser.query.QueryState;
+import com.antibas.math.Combinations;
+import com.antibas.math.Math2;
+import com.antibas.util.json.Json;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -11,15 +15,28 @@ public class Main {
 //        for(int i = 0; i < 100; i++) {
 //            System.out.println(Math2.recaman(i));
 //        }
-        QueryState[][] grammar = {
-            {QueryState.STRING_LITERAL},
-            {QueryState.PARENTHESIS_OPEN, QueryState.EXPRESSION, QueryState.PARENTHESIS_CLOSE},
-            {QueryState.STRING_LITERAL, QueryState.BOOLEAN_OPERATOR, QueryState.STRING_LITERAL},
-            {QueryState.EXPRESSION, QueryState.BOOLEAN_OPERATOR, QueryState.EXPRESSION},
-            {QueryState.STRING_LITERAL, QueryState.BOOLEAN_OPERATOR, QueryState.EXPRESSION},
-            {QueryState.EXPRESSION, QueryState.BOOLEAN_OPERATOR, QueryState.STRING_LITERAL}
-        };
-        System.out.println(new QueryParser().compile("\"Interpretable\" OR \"Interpretability\" AND \"Nigga\""));
+//        QueryState[][] grammar = {
+//            {QueryState.STRING_LITERAL},
+//            {QueryState.PARENTHESIS_OPEN, QueryState.EXPRESSION, QueryState.PARENTHESIS_CLOSE},
+//            {QueryState.STRING_LITERAL, QueryState.BOOLEAN_OPERATOR, QueryState.STRING_LITERAL},
+//            {QueryState.EXPRESSION, QueryState.BOOLEAN_OPERATOR, QueryState.EXPRESSION},
+//            {QueryState.STRING_LITERAL, QueryState.BOOLEAN_OPERATOR, QueryState.EXPRESSION},
+//            {QueryState.EXPRESSION, QueryState.BOOLEAN_OPERATOR, QueryState.STRING_LITERAL}
+//        };
+//        System.out.println(new QueryParser().compile("\"Interpretable\" OR \"Interpretability\" AND \"Nigga\""));
+//        System.out.println(new Json("""
+//                a: "string"
+//                number: 567
+//                number2: 23.5
+//                bool: true
+//                bd: null
+//                arr: [32, 45.5, false]
+//                js: {a: "string"; number: 567; bool: true}
+//                """));
+
+        System.out.println(Combinations.combinations(List.of(0, 1, 2), 2));
+        System.out.println(Combinations.permutations(List.of(0, 1, 2), 2));
+        System.out.println(Combinations.product(List.of(0, 1, 2), 2));
 		  /*
 		  Graph<Vertex, Edge> G = new Graph<>();
 		  Vertex A = new Vertex("A");

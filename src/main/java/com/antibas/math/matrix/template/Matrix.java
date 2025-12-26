@@ -257,8 +257,7 @@ public class Matrix<T> implements Serializable, Collection<T>, Comparable<Matrix
     
     @Override
     public boolean equals(Object o){
-        if(!(o instanceof Matrix)) throw new IllegalArgumentException();
-        Matrix<T> O = (Matrix<T>)o;
+        if(!(o instanceof Matrix O)) throw new IllegalArgumentException();
         if(rows != O.rows || columns != O.columns) return false;
         for(int r = 0; r < rows; r++){ 
             for(int c = 0; c < columns; c++){

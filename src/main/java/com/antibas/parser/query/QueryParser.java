@@ -1,14 +1,13 @@
 package com.antibas.parser.query;
 
 import com.antibas.parser.Parser;
-import com.antibas.util.Json;
+import com.antibas.util.json.Json;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @Setter
 @Getter
@@ -35,7 +34,6 @@ public class QueryParser extends Parser<QueryState, QueryToken, String> {
                 case NEW_TOKEN:
                     currentToken = new QueryToken();
                     if (currentToken.getValue().matches("[ \t\n\r\f]")){
-                        stateNext = QueryState.NEW_TOKEN;
                         i++;
                     } else stateNext = switch (input.charAt(i)) {
                         case '(' -> {
@@ -182,32 +180,55 @@ public class QueryParser extends Parser<QueryState, QueryToken, String> {
     public String convert(List<QueryToken> tokens) {
         Json json = new Json();
         if (tokens.size() == 1){
+            Json inner = new Json();
+            List<Json> queries = new ArrayList<>();
+
+            inner.put("$or", queries);
             json.put("query", tokens.getFirst().getValue());
         }
 
         if (tokens.size() == 3){
             List<String> values = tokens.stream().map(t -> t.getValue().replace("\"", "")).toList();
-            json.put("$%s".formatted(values.get(1).toLowerCase()), Arrays.asList(tokens.get(0).getValue(), tokens.get(2).getValue()));
+            json = Json.parse("""
+                       "$%s": [
+                           {
+                                "$or": [
+                                    {"title": {"$regex": %s, "$options": "i"}},
+                                    {"abstract": {"$regex": %s, "$options": "i"}}
+                                ]
+                           },
+                           {
+                                "$or": [
+                                    {"title": {"$regex": %s, "$options": "i"}},
+                                    {"abstract": {"$regex": %s, "$options": "i"}}
+                                ]
+                           }
+                       ]
+            """.formatted(values.get(1).toLowerCase(), values.get(0), values.get(0), values.get(2), values.get(2))
+                    .replace("[\n\t ]", ""));
+//            json.put("$%s".formatted(values.get(1).toLowerCase()),
+//                    convert(Arrays.asList(tokens.get(0), tokens.get(2)))
+//            );
 //            String left, operator, right, leftExpression, rightExpression;
 //            List<String> values = tokens.stream().map(t -> t.getValue().replace("\"", "")).toList();
-//            return """
-//                   {
-//                       "$%s": [
-//                           {
-//                                "$or": [
-//                                    {"title": {"$regex": %s, "$options": "i"}},
-//                                    {"abstract": {"$regex": %s, "$options": "i"}}
-//                                ]
-//                           },
-//                           {
-//                                "$or": [
-//                                    {"title": {"$regex": %s, "$options": "i"}},
-//                                    {"abstract": {"$regex": %s, "$options": "i"}}
-//                                ]
-//                           }
-//                       ]
-//                   }
-//            """.formatted(values.get(1).toLowerCase(), values.get(0), values.get(0), values.get(2), values.get(2));
+            return """
+                   {
+                       "$%s": [
+                           {
+                                "$or": [
+                                    {"title": {"$regex": %s, "$options": "i"}},
+                                    {"abstract": {"$regex": %s, "$options": "i"}}
+                                ]
+                           },
+                           {
+                                "$or": [
+                                    {"title": {"$regex": %s, "$options": "i"}},
+                                    {"abstract": {"$regex": %s, "$options": "i"}}
+                                ]
+                           }
+                       ]
+                   }
+            """.formatted(values.get(1).toLowerCase(), values.get(0), values.get(0), values.get(2), values.get(2));
         }
         return json.toString();
     }

@@ -5,7 +5,7 @@ import com.antibas.math.function.Domain;
 import java.io.Serial;
 import java.io.Serializable;
 
-public abstract class Number2 extends Number implements Serializable{
+public abstract class Number2 extends Number{
 
 	/**
 	 * 

@@ -184,4 +184,41 @@ public final class Methods {
     	}
     	return false;
     }
+
+    public static boolean isDouble(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
+    }
+
+    public static boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
+    }
+
+    public static boolean isBoolean(String value) {
+        return value.equalsIgnoreCase("true")
+                || value.equalsIgnoreCase("false");
+    }
+
+    public static boolean parseBoolean(String value) {
+        if(!isBoolean(value))
+            throw new IllegalArgumentException("Invalid boolean value: "+ value);
+
+        return value.equalsIgnoreCase("true");
+    }
+
+    public static String toSnakeCase(String input) {
+        return input
+                .replaceAll("([a-z0-9])([A-Z])", "$1_$2")
+                .replaceAll("([A-Z]+)([A-Z][a-z])", "$1_$2")
+                .toLowerCase();
+    }
 }

@@ -5,7 +5,7 @@ public enum Letter {
 	
 	public final int index;
 
-	private Letter(int index) {
+	Letter(int index) {
 		this.index = index;
 	}
 	

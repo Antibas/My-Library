@@ -13,7 +13,7 @@ public class Play {
 			  System.out.print("Move: ");
 			  String move = sc.next();
 			  
-			  if(move == "b") {
+			  if(move.equals("b")) {
 				  break;
 			  }
 			  switch(move) {

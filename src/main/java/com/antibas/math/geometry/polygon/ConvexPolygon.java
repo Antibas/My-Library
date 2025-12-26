@@ -1,12 +1,13 @@
 package com.antibas.math.geometry.polygon;
 
+import com.antibas.math.geometry.Baseable;
 import com.antibas.math.geometry.vector.Point;
 import com.antibas.math.geometry.vector.Point2D;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-public abstract class ConvexPolygon extends Polygon{
+public abstract class ConvexPolygon extends Polygon implements Baseable {
     public ConvexPolygon(Point center, int size, Collection<Double> angles, Collection<Double> sides) {
         super(center, size, angles, sides);
         this.validate();
@@ -22,7 +23,4 @@ public abstract class ConvexPolygon extends Polygon{
         if(Arrays.stream(this.angles).reduce(0.0d, Double::sum) != (angles.length- 2)*180)
             throw new IllegalArgumentException("Angles must sum up to "+ (angles.length- 2)*180);
     }
-
-    public abstract double getHeight();
-    public abstract double getBase();
 }

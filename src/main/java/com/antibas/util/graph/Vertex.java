@@ -55,12 +55,12 @@ public class Vertex implements Nameable, Comparable<Vertex>{
 	}
 	
 	public boolean equals(Object obj) {
-		if(obj instanceof Vertex) {
-			return ((Vertex)obj).name.equals(name);
+		if(obj instanceof Vertex v) {
+			return v.name.equals(name);
 		}
 		
-		if(obj instanceof String) {
-			return ((String)obj).equals(name);
+		if(obj instanceof String str) {
+			return str.equals(name);
 		}
 		
 		return false;

@@ -38,7 +38,7 @@ public abstract class StringIO {
     public static String LCS(String s1, String s2){
         char[] a1 = s1.toCharArray(), a2 = s2.toCharArray();
         Matrix L = new Matrix(a1.length+1, a2.length+1);
-        String a = "";
+        StringBuilder a = new StringBuilder();
         L.fill(0);
         
         for(int i = 1; i < L.getRows(); i++){
@@ -51,24 +51,12 @@ public abstract class StringIO {
         for(int i = 1; i < L.getRows(); i++){
             for(int j = 1; j < L.getColumns(); j++){
                 if((int)L.elementAt(i, j) > m && a1[i-1] == a2[j-1]){
-                    a += a1[i-1];
+                    a.append(a1[i - 1]);
                     m = (int) L.elementAt(i, j);
                 }
             }
         }
-        return a;
-    }
-    
-    public static boolean isNumeric(String strNum) {
-        if (strNum == null) {
-            return false;
-        }
-        try {
-            double d = Double.parseDouble(strNum);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
+        return a.toString();
     }
     
     public static CountMap<Character> getFrequencies(String string){

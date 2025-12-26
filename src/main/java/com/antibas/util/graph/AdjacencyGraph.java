@@ -173,9 +173,9 @@ public class AdjacencyGraph<V extends Vertex, E extends Edge> extends HashMap<V,
 	
 	@Override
 	public Set<E> get(Object key) {
-		if(key instanceof String) {
+		if(key instanceof String str) {
 			for(V v: this.keySet()) {
-				if(v.getName().equals(key)) {
+				if(v.getName().equals(str)) {
 					return super.get(v);
 				}
 			}
@@ -323,9 +323,9 @@ public class AdjacencyGraph<V extends Vertex, E extends Edge> extends HashMap<V,
 	
 	@Override
 	public boolean containsKey(Object key) {
-		if(key instanceof String) {
+		if(key instanceof String str) {
 			for(V v: vertices()) {
-				if(v.getName().equals(key)) {
+				if(v.getName().equals(str)) {
 					return true;
 				}
 			}
@@ -336,10 +336,10 @@ public class AdjacencyGraph<V extends Vertex, E extends Edge> extends HashMap<V,
 
 	@Override
 	public boolean containsValue(Object value) {
-		if(value instanceof String) {
+		if(value instanceof String str) {
 			for(V v: vertices()) {
 				for(E e: incidentEdges(v)) {
-					if(e.getName().equals(value)) {
+					if(e.getName().equals(str)) {
 						return true;
 					}
 				}
@@ -461,11 +461,9 @@ public class AdjacencyGraph<V extends Vertex, E extends Edge> extends HashMap<V,
 		return str.toString();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof AdjacencyGraph<?, ?>) {
-			AdjacencyGraph<V, E> objnew = (AdjacencyGraph<V, E>)obj;
+		if(obj instanceof AdjacencyGraph<?, ?> objnew) {
 			return this.vertices().equals(objnew.vertices()) &&
 				   this.edges().equals(objnew.edges());
 		}

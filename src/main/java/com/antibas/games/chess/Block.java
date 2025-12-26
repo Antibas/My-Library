@@ -1,5 +1,8 @@
 package com.antibas.games.chess;
 
+import lombok.Getter;
+
+@Getter
 public class Block {
 	private final Color color;
 	private Piece piece;
@@ -13,15 +16,7 @@ public class Block {
 		this(color, null);
 	}
 
-	public Color getColor() {
-		return color;
-	}
-
-	public Piece getPiece() {
-		return piece;
-	}
-
-	public void placePiece(Piece piece) {
+    public void placePiece(Piece piece) {
 		this.piece = piece;
 	}
 	

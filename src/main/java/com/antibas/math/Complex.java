@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Setter
 @Getter
-public final class Complex extends Number2 implements Comparable<Complex>, Serializable{
+public final class Complex extends Number2 implements Comparable<Complex>{
 	public static final Complex MAX_VALUE = new Complex(Double.MAX_VALUE, Double.MAX_VALUE);
 	public static final Complex MIN_VALUE = new Complex(Double.MIN_VALUE, Double.MIN_VALUE);
 	public static final Complex DX_COMPLEX = Complex.MIN_VALUE;

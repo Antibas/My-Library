@@ -1,4 +1,4 @@
-package com.antibas.util;
+package com.antibas.util.date;
 
 import lombok.Getter;
 import lombok.Setter;

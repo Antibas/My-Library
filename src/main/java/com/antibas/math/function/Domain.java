@@ -183,9 +183,8 @@ public class Domain {
 
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Domain) {
-			Domain o = (Domain)(obj);
-			return this.start == o.start && this.closedStart == o.closedStart && 
+		if(obj instanceof Domain o) {
+			return this.start == o.start && this.closedStart == o.closedStart &&
 				   this.end == o.end && this.closedEnd == o.closedEnd &&
 				   this.dx == o.dx && this.next.equals(o.next);
 		}

@@ -9,10 +9,8 @@ import com.antibas.math.function.Function;
 import com.antibas.math.function.Series;
 import com.antibas.util.ArrayUtils;
 import com.antibas.util.pair.Pair;
+import net.objecthunter.exp4j.ExpressionBuilder;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import java.util.*;
 
 /**
@@ -78,7 +76,7 @@ public final class Math2{
     public static double mean(double[] a) {
     	return Math2.sum(a)/(double)a.length;
     }
-    
+
     /**
      * Returns the n-th Fibonacci number
      * @param n the fibonacci number the user wants
@@ -118,60 +116,6 @@ public final class Math2{
         if(n<0) throw new IllegalArgumentException();
         if(n == 0 || n == 1) return 1;
         return n*fac(n-1);
-    }
-    
-    /**
-     * Returns the number of ordered arrangements of k objects taken from n unlike objects
-     * @param n the number of initial objects
-     * @param k the number of objects taken
-     * @return the number of ordered arrangements of k objects taken from n unlike objects
-     */
-    public static int P(int n, int k){
-        if(n<k || n<0 || k<0) throw new IllegalArgumentException();
-        return fac(n)/fac(n-k);
-    }
-    
-    /**
-     * Returns the number of ways of selecting k objects from n unlike objects
-     * It is equivalent with P(n, k)/fac(k)
-     * @param n the number of initial objects
-     * @param k the number of objects taken
-     * @return the number of ways of selecting k objects from n unlike objects
-     */
-    public static int C(int n, int k){
-        if(n<k || n<0 || k<0) throw new IllegalArgumentException();
-        return P(n, k)/fac(k);
-    }
-    
-    /**
-     * Overload of P(int n, int k), but it returns 
-     * the number of ways of selecting k.length() objects,
-     * each one with its own possibility,
-     * taken from n unlike objects
-     *
-     * @param n the number of initial objects
-     * @param k the number of objects taken
-     * @return the number of ordered arrangements of k.length() objects, each one with its own possibility, taken from n unlike objects
-     */
-    public static int P(int n, int... k){
-        if(n<0) throw new IllegalArgumentException();
-        for(int i: k)
-            if(n<i) throw new IllegalArgumentException();
-        return fac(n)/arrayMultipleFactorial(k);
-    }
-    
-    /**
-     * Returns the Multiple of all the factorials of each
-     * element of array a
-     * Only to help P(int n, int... k)
-     * @param a an array of integers
-     * @return the Multiple of all the factorials of each element of array a.
-     */
-    private static int arrayMultipleFactorial(int[] a){
-        int r = 1;
-        for(int i: a)
-            r *= fac(i);
-        return r;
     }
     
     /**
@@ -219,40 +163,6 @@ public final class Math2{
     public static double RNG(double max){
         //return (new Random()).nextInt(max + 1);
     	return Math2.RNG(0.0, max);
-    }
-    
-    /**
-     * Randomly returns a number amongst the 
-     * elements of array numbers
-     * @param numbers an array of integers
-     * @return randomly a number amongst the elements of numbers 
-     */
-    public static int choice(int... numbers){
-        return numbers[RNG(0, numbers.length-1)];
-    }
-    
-    public static double choice(double... numbers){
-        return numbers[RNG(0, numbers.length-1)];
-    }
-    
-    public static <T> T choice(T[] objects){
-        return objects[RNG(0, objects.length-1)];
-    }
-    
-    public static <T> T choice(Collection<T> objects){
-    	if(objects.isEmpty()) {
-    		return null;//throw new IllegalArgumentException();
-    	}
-    	return objects.stream().toList().get(RNG(0, objects.size()-1));
-    	/*int item = new Random().nextInt(objects.size()); 
-    	int i = 0;
-    	for(T obj : objects)
-    	{
-    	    if (i == item)
-    	        return obj;
-    	    i++;
-    	};
-    	return null;*/
     }
     
     public static int RNG(Map<? super Integer, ? super Integer> numbers){
@@ -353,7 +263,7 @@ public final class Math2{
         String nn = Integer.toString(n);
         d = new int[nn.length()];
         for(int i = 0; i < d.length; i++){
-            d[i] = (int)nn.charAt(i);
+            d[i] = nn.charAt(i);
         }
         return d;
     }
@@ -363,7 +273,7 @@ public final class Math2{
         String nn = Double.toString(n);
         d = new int[nn.length()];
         for(int i = 0; i < d.length; i++){
-            d[i] = (int)nn.charAt(i);
+            d[i] = nn.charAt(i);
         }
         return d;
     }
@@ -480,11 +390,12 @@ public final class Math2{
     	return d - intPart(d);
     }
     
-    public static double eval(String exp) throws ScriptException {
-    	ScriptEngineManager mgr = new ScriptEngineManager();
-        ScriptEngine engine = mgr.getEngineByName("JavaScript");
-        
-		return (double) engine.eval(exp);
+    public static double eval(String exp) {
+//    	ScriptEngineManager mgr = new ScriptEngineManager();
+//        ScriptEngine engine = mgr.getEngineByName("JavaScript");
+//
+//		return (double) engine.eval(exp);
+        return new ExpressionBuilder(exp).build().evaluate();
     }
     
     public static double std(double[] x) {
