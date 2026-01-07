@@ -23,19 +23,19 @@ public abstract class Number2 extends Number{
 	
 	public abstract Complex complexValue();
 	
-	public abstract Number add(Number2 o);
-	public abstract Number subtract(Number2 o);
-	public abstract Number multiply(Number2 o);
-	public abstract Number divide(Number2 o) throws ArithmeticException;
+	public abstract <T extends Number2> Number add(T o);
+	public abstract <T extends Number2> Number subtract(T o);
+	public abstract <T extends Number2> Number multiply(T o);
+	public abstract <T extends Number2> Number divide(T o) throws ArithmeticException;
 	public abstract Number invert();
 	public abstract Number abs();
 	public abstract Number pow(int power);
 	
-	public abstract boolean greaterThan(Number2 o);
-	public abstract boolean greaterThanOrEqual(Number2 o);
-	public abstract boolean lessThan(Number2 o);
-	public abstract boolean lessThanOrEqual(Number2 o);
-	public abstract boolean notEquals(Number2 o);
+	public abstract <T extends Number2> boolean greaterThan(T o);
+	public abstract <T extends Number2> boolean greaterThanOrEqual(T o);
+	public abstract <T extends Number2> boolean lessThan(T o);
+	public abstract <T extends Number2> boolean lessThanOrEqual(T o);
+	public abstract <T extends Number2> boolean notEquals(T o);
 	
 	public abstract boolean isInfinite();
 	public boolean isFinite() {

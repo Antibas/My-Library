@@ -99,12 +99,22 @@ public final class Methods {
      * @throws IllegalAccessException
      */
     public static String variableName(Object variable, Class<?> c) throws IllegalAccessException{
-        Field[] fields = c.getFields();
-        
-        for(Field field: fields){
-            if(field.get(null).equals(variable)) return field.getName();
-        }
-        return null;
+//        Field[] fields = c.getFields();
+//
+//        for(Field field: fields){
+//            if(field.get(null).equals(variable)) return field.getName();
+//        }
+//        return null;
+        return Arrays.stream(c.getFields()).filter(f -> {
+            try {
+                return f.get(null).equals(variable);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        })
+        .findFirst()
+        .orElseThrow(IllegalArgumentException::new)
+        .getName();
     }
     
     public static int sum(int a, int b, int[] array){

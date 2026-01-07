@@ -37,22 +37,22 @@ public class Whole extends Number2 implements Comparable<Whole> {
 	}
 
 	@Override
-	public Whole add(Number2 o) {
+	public <T extends Number2> Whole add(T o) {
 		return new Whole(this.value+o.intValue());
 	}
 
 	@Override
-	public Whole subtract(Number2 o) {
+	public <T extends Number2> Number subtract(T o) {
 		return new Whole(this.value-o.intValue());
 	}
 
 	@Override
-	public Whole multiply(Number2 o) {
+	public <T extends Number2> Number multiply(T o) {
 		return new Whole(this.value*o.intValue());
 	}
 
 	@Override
-	public Whole divide(Number2 o) throws ArithmeticException {
+	public <T extends Number2> Number divide(T o) throws ArithmeticException {
 		if (o.intValue() == 0) throw new ArithmeticException();
 		return new Whole(this.value/o.intValue());
 	}
@@ -68,27 +68,27 @@ public class Whole extends Number2 implements Comparable<Whole> {
 	}
 
 	@Override
-	public boolean greaterThan(Number2 o) {
+	public <T extends Number2>  boolean greaterThan(T o) {
 		return this.value>o.intValue();
 	}
 
 	@Override
-	public boolean greaterThanOrEqual(Number2 o) {
+	public <T extends Number2>  boolean greaterThanOrEqual(T o) {
 		return this.value>=o.intValue();
 	}
 
 	@Override
-	public boolean lessThan(Number2 o) {
+	public <T extends Number2> boolean lessThan(T o) {
 		return this.value<o.intValue();
 	}
 
 	@Override
-	public boolean lessThanOrEqual(Number2 o) {
+	public <T extends Number2>  boolean lessThanOrEqual(T o) {
 		return this.value<=o.intValue();
 	}
 
 	@Override
-	public boolean notEquals(Number2 o) {
+	public <T extends Number2> boolean notEquals(T o) {
 		return this.value!=o.intValue();
 	}
 

@@ -22,7 +22,7 @@ import java.util.Map.Entry;
  * @author User
  */
 public abstract class StringIO {
-	public static String clearArith(String s) {
+	public static String clearNumerics(String s) {
 		return s.replaceAll("[0-9]", "");
 	}
 	
@@ -32,7 +32,7 @@ public abstract class StringIO {
 	
 	public static String clearSpecialChars(String s) {
 //		String reg = "[=[]()!@#$%^&*;:\\\\'\\\"<>/{}\\\\]";
-		return s.replaceAll("", "");
+		return s.replaceAll("[=\\[\\]()!@#$%^&*;:\\\\'\"<>/{}]", "");
 	}
 	
     public static String LCS(String s1, String s2){

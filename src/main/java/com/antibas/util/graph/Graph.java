@@ -79,6 +79,37 @@ public interface Graph<V extends Vertex, E extends Edge> extends Comparator<V>, 
 	 * @return true
 	 */
 	boolean removeEdge(E edge);
+	/**
+	 * Puts an edge connecting two existing vertices by their names.
+	 * @param vertex1 s
+	 * @param vertex2 s
+	 * @param edge s
+	 * @return the first vertex
+	 */
+	V putEdge(String vertex1, String vertex2, E edge);
+	/**
+	 * Puts an edge connecting one vertex. If the
+	 * vertex already exists and the edge is not already
+	 * connected with two existing vertices, it is merged with
+	 * the vertex's edge set.
+	 * @param vertex s
+	 * @param edge s
+	 * @return the vertex
+	 */
+	V putEdge(String vertex, E edge);
+	/**
+	 * Removes an edge from a specific vertex
+	 * @param vertex s
+	 * @param edge s
+	 * @return true if successfully removed
+	 */
+	boolean removeEdge(String vertex, E edge);
+	/**
+	 * Removes an edge from all vertices
+	 * @param edge s
+	 * @return true
+	 */
+	boolean removeEdge(String edge);
 	E getEdge(E edge);
 	E getEdge(String edge);
 	V getVertex(V vertex);

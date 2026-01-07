@@ -1,10 +1,12 @@
 package com.antibas.util.list;
 
+import com.antibas.math.Number2;
+
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class NumberList<T extends Number> extends ArrayList<T> {
+public class NumberList<T extends Number2> extends ArrayList<T> {
 
 	/**
 	 * 
@@ -25,8 +27,10 @@ public class NumberList<T extends Number> extends ArrayList<T> {
 	}
 	
 	public void plus(T number) {
-		for(int i = 0; i < size(); i++) {
-			this.set(i, this.get(i));
-		}
+        this.replaceAll(t -> (T) t.add(number));
+	}
+
+	public void minus(T number) {
+		this.replaceAll(t -> (T) t.subtract(number));
 	}
 }

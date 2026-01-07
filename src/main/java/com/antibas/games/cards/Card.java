@@ -5,6 +5,7 @@
  */
 package com.antibas.games.cards;
 
+import com.antibas.util.Describable;
 import com.antibas.util.Nameable;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,7 @@ import java.io.Serial;
  */
 @Setter
 @Getter
-public abstract class Card implements Nameable {
+public abstract class Card implements Nameable, Describable {
     /**
 	 * 
 	 */

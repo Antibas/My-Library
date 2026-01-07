@@ -1,8 +1,13 @@
 package com.antibas.util.list;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serial;
 import java.util.Collection;
 
+@Setter
+@Getter
 public class StepArrayList<T> extends ArrayListIndexConvertor<T> {
 
 	/**
@@ -35,15 +40,7 @@ public class StepArrayList<T> extends ArrayListIndexConvertor<T> {
 		this.step = step;
 	}
 
-	public int getStep() {
-		return step;
-	}
-
-	public void setStep(int step) {
-		this.step = step;
-	}
-
-	@Override
+    @Override
 	public int indexConvert(int index) {
 		return index+this.step;
 	}

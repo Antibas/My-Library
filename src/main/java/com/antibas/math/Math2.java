@@ -12,6 +12,7 @@ import com.antibas.util.pair.Pair;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * A class that contains many math tools
@@ -64,13 +65,18 @@ public final class Math2{
         if(d <= 1.0) return d;
         return log2(logr(d));
     }
+
+    public static double root(double number, double n){
+        return Math.pow(number, 1.0 / n);
+    }
     
     public static double sum(double[] a) {
-    	double S = 0d;
-    	for(double aa: a) {
-    		S += aa;
-    	}
-    	return S;
+//    	double S = 0d;
+//    	for(double aa: a) {
+//    		S += aa;
+//    	}
+//    	return S;
+        return Arrays.stream(a).reduce(0, Double::sum);
     }
     
     public static double mean(double[] a) {
@@ -196,18 +202,29 @@ public final class Math2{
     public static boolean isOdd(int n){
         return !isEven(n);
     }
+
+    public static double[] normalize(double[] a) {
+        double[] aa = new double[a.length];
+        double max = ArrayUtils.max(a), min = ArrayUtils.min(a);
+        double l = max - min;
+        for(int i = 0; i < aa.length; i++) {
+            aa[i] = (a[i] - min)/l;
+        }
+        return aa;
+    }
     
     /**
      * 
      * @param n an integer
      * @return all the dividends of n except n and 1.
      */
-    public static Vector<Integer> getDividends(int n){
-        Vector<Integer> d = new Vector<>();
-        for(int i = 2; i < n; i++)
-            if(n%i==0) d.add(i);
-        if(d.isEmpty()) d.add(n);
-        return d;
+    public static List<Integer> getDividends(int n){
+//        Vector<Integer> d = new Vector<>();
+//        for(int i = 2; i < n; i++)
+//            if(n%i==0) d.add(i);
+//        if(d.isEmpty()) d.add(n);
+//        return d;
+        return Arrays.stream(range(2, n)).filter(i -> n%i==0).boxed().toList();
     }
     
     /**
@@ -304,32 +321,6 @@ public final class Math2{
     	return Math2.round(a, 0);
     }
     
-    private static HashMap<Character, Integer> initializeLexMap(){
-        int number = 26;
-        HashMap<Character, Integer> hm = new HashMap<>(26);
-        for(char c = 'A'; c <= 'Z';c++){
-            hm.put(c, number--);
-        }
-        return hm;
-    }
-    
-    public static final Map<Character, Integer> LEXMAP = initializeLexMap();
-    
-    public static int lexarithm(String phrase){
-        return lexarithm(phrase, LEXMAP);
-    }
-    
-    public static int lexarithm(String phrase, Map<? super Character, ? super Integer> lexmap){
-        String[] words = phrase.toUpperCase().split(" ");
-        int result = 0;
-        char[] wordArray;
-        for(String word: words){
-            wordArray = word.toCharArray();
-            for(char c: wordArray) result += (Integer)lexmap.get(c);
-        }
-        return result;
-    }
-    
     public static boolean converges(int a, int b, Series s){
         return s.sum(a, b) == Integer.MAX_VALUE;
     }
@@ -389,7 +380,11 @@ public final class Math2{
     public static float decimalPart(float d) {
     	return d - intPart(d);
     }
-    
+
+    public static boolean divides(double n, double k){
+        return decimalPart(n/k) == 0;
+    }
+
     public static double eval(String exp) {
 //    	ScriptEngineManager mgr = new ScriptEngineManager();
 //        ScriptEngine engine = mgr.getEngineByName("JavaScript");

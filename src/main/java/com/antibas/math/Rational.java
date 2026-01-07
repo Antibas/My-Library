@@ -53,7 +53,7 @@ public final class Rational extends Number2 implements Comparable<Rational>{
 	}
 
 	@Override
-	public Rational add(Number2 o) {
+	public <T extends Number2>Rational add(T o) {
 		if(o instanceof Rational oRational) {
 			if(this.denominator == oRational.denominator)
 				return new Rational(numerator+oRational.numerator, denominator);
@@ -64,7 +64,7 @@ public final class Rational extends Number2 implements Comparable<Rational>{
 	}
 
 	@Override
-	public Rational subtract(Number2 o) {
+	public <T extends Number2>Rational subtract(T o) {
 		if(o instanceof Rational oRational) {
 			if(this.denominator == oRational.denominator)
 				return new Rational(numerator-oRational.numerator, denominator);
@@ -75,7 +75,7 @@ public final class Rational extends Number2 implements Comparable<Rational>{
 	}
 
 	@Override
-	public Rational multiply(Number2 o) {
+	public <T extends Number2>Rational multiply(T o) {
 		if(o instanceof Rational oRational) {
 			return new Rational(numerator*oRational.numerator, denominator*oRational.denominator);
 		}
@@ -83,7 +83,7 @@ public final class Rational extends Number2 implements Comparable<Rational>{
 	}
 
 	@Override
-	public Rational divide(Number2 o) throws ArithmeticException {
+	public <T extends Number2>Rational divide(T o) throws ArithmeticException {
 		if(o instanceof Rational oRational) {
 			return this.multiply(oRational.invert());
 		}
@@ -98,48 +98,6 @@ public final class Rational extends Number2 implements Comparable<Rational>{
 	@Override
 	public Rational abs() {
 		return new Rational(Math.abs(this.numerator), Math.abs(this.denominator));
-	}
-
-	@Override
-	public boolean greaterThan(Number2 o) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean greaterThanOrEqual(Number2 o) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean lessThan(Number2 o) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean lessThanOrEqual(Number2 o) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean notEquals(Number2 o) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isInfinite() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isFinite() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -169,8 +127,40 @@ public final class Rational extends Number2 implements Comparable<Rational>{
 
 	@Override
 	public Number pow(int power) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Rational(
+                (int) Math.pow(numerator, power),
+                (int) Math.pow(denominator, power)
+        );
+	}
+
+	@Override
+	public <T extends Number2> boolean greaterThan(T o) {
+		return this.doubleValue() > o.doubleValue();
+	}
+
+	@Override
+	public <T extends Number2> boolean greaterThanOrEqual(T o) {
+		return this.doubleValue() >= o.doubleValue();
+	}
+
+	@Override
+	public <T extends Number2> boolean lessThan(T o) {
+		return this.doubleValue() < o.doubleValue();
+	}
+
+	@Override
+	public <T extends Number2> boolean lessThanOrEqual(T o) {
+		return this.doubleValue() <= o.doubleValue();
+	}
+
+	@Override
+	public <T extends Number2> boolean notEquals(T o) {
+		return this.doubleValue() != o.doubleValue();
+	}
+
+	@Override
+	public boolean isInfinite() {
+		return false;
 	}
 
 	@Override

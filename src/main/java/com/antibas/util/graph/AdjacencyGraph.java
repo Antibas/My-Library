@@ -25,9 +25,9 @@ public class AdjacencyGraph<V extends Vertex, E extends Edge> extends HashMap<V,
 	@SuppressWarnings("unchecked")
 	public AdjacencyGraph(Pair<? extends V, ? extends E>... p) {
 		super();
-		for (int i = 0; i < p.length; i++) {
-			this.putVertex(p[i].getFirst(), p[i].getSecond());
-		}
+        for (Pair<? extends V, ? extends E> pair : p) {
+            this.putVertex(pair.getFirst(), pair.getSecond());
+        }
 	}
 	
 	public AdjacencyGraph(AdjacencyGraph<V, E> g) {
@@ -110,7 +110,7 @@ public class AdjacencyGraph<V extends Vertex, E extends Edge> extends HashMap<V,
 	@Override
 	@SuppressWarnings("unchecked")
 	public Set<E> putVertex(V vertex, E... edges) {
-		return this.putVertex(vertex, (HashSet<E>)Methods.arrayToSet(edges));
+		return this.putVertex(vertex, Methods.arrayToSet(edges));
 	}
 	
 	@Override
@@ -144,7 +144,27 @@ public class AdjacencyGraph<V extends Vertex, E extends Edge> extends HashMap<V,
 		});
 		return true;
 	}
-	
+
+	@Override
+	public V putEdge(String vertex1, String vertex2, E edge) {
+		return this.putEdge((V) new Vertex(vertex1), (V) new Vertex(vertex2), edge);
+	}
+
+	@Override
+	public V putEdge(String vertex, E edge) {
+		return this.putEdge((V) new Vertex(vertex), edge);
+	}
+
+	@Override
+	public boolean removeEdge(String vertex, E edge) {
+		return this.removeEdge((V) new Vertex(vertex), edge);
+	}
+
+	@Override
+	public boolean removeEdge(String edge) {
+		return this.removeEdge((E) new Edge(edge));
+	}
+
 	@Override
 	public boolean hasVertex(V vertex) {
 		return this.hasVertex(vertex.getName());
@@ -173,14 +193,23 @@ public class AdjacencyGraph<V extends Vertex, E extends Edge> extends HashMap<V,
 	
 	@Override
 	public Set<E> get(Object key) {
-		if(key instanceof String str) {
-			for(V v: this.keySet()) {
-				if(v.getName().equals(str)) {
-					return super.get(v);
-				}
-			}
-		}
-		return super.get(key);
+//		if(key instanceof String str) {
+//			for(V v: this.keySet()) {
+//				if(v.getName().equals(str)) {
+//					return super.get(v);
+//				}
+//			}
+//		}
+//		return super.get(key);
+		return (key instanceof String str)?
+				super.get(
+					this.keySet()
+					.stream()
+					.filter(e -> e.getName().equals(str))
+					.findFirst()
+					.orElse(null)
+				)
+				: super.get(key);
 	}
 	
 	@Override
@@ -189,12 +218,17 @@ public class AdjacencyGraph<V extends Vertex, E extends Edge> extends HashMap<V,
 	}
 	
 	public E getEdge(String edge) {
-		for(E e: this.edges()) {
-			if(e.getName().equals(edge)) {
-				return e;
-			}
-		}
-		return null;
+//		for(E e: this.edges()) {
+//			if(e.getName().equals(edge)) {
+//				return e;
+//			}
+//		}
+//		return null;
+		return this.edges()
+				.stream()
+				.filter(e -> e.getName().equals(edge))
+				.findFirst()
+				.orElse(null);
 	}
 	
 	@Override

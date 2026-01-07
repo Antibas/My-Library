@@ -110,34 +110,32 @@ public class RandomArrayList<E> extends ArrayListIndexConvertor<E> {
 	
 	@Override
 	public Iterator<E> iterator() {
-		Iterator<E> it = new Iterator<E>() {
+        return new Iterator<E>() {
+			private final int[] indexSet = Math2.range(0, size());
+			private final boolean[] indices = ArrayUtils.falses(indexSet.length);
 
-            private int[] indexSet = Math2.range(0, size());
-            private boolean[] indices = ArrayUtils.falses(indexSet.length);
-            
-            @Override
-            public boolean hasNext() {
-            	return Methods.and(indices);//!(currentIndexR == rows-1 && currentIndexC == columns); //);//currentIndexR < rows;
-            }
+			@Override
+			public boolean hasNext() {
+				return Methods.and(indices);//!(currentIndexR == rows-1 && currentIndexC == columns); //);//currentIndexR < rows;
+			}
 
-            @Override
-            public E next() {
-            	int index;
-            	do{
-            		index = Combinations.choice(indexSet);
-            	} while(indices[index]);
-            	indices[index] = true;
+			@Override
+			public E next() {
+				int index;
+				do{
+					index = Combinations.choice(indexSet);
+				} while(indices[index]);
+				indices[index] = true;
 				return RandomArrayList.this.get(index);
 
-            }
+			}
 
-            @Override
-            public void remove() {
-            	RandomArrayList.this.remove(this.next());
-                //throw new UnsupportedOperationException();
-            }
-        };
-        return it;
+			@Override
+			public void remove() {
+				RandomArrayList.this.remove(this.next());
+				//throw new UnsupportedOperationException();
+			}
+		};
 	}
 
 	/*@Override

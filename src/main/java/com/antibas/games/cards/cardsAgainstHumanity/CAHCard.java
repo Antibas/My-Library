@@ -6,12 +6,13 @@
 package com.antibas.games.cards.cardsAgainstHumanity;
 
 import com.antibas.games.cards.Card;
+import com.antibas.util.Describable;
 
 /**
  *
  * @author User
  */
-public abstract class CAHCard extends Card {
+public abstract class CAHCard extends Card implements Describable {
     public CAHCard(String description) {
         super("", description, 0);
     }

@@ -464,16 +464,6 @@ public final class ArrayUtils {
 		return a2;
 	}
 	
-	public static double[] normalize(double[] a) {
-		double[] aa = new double[a.length];
-		double max = max(a), min = min(a);
-		double l = max - min;
-		for(int i = 0; i < aa.length; i++) {
-			aa[i] = (a[i] - min)/l;
-		}
-		return aa;
-	}
-
 	public static <T> List<T> merge(Collection<? extends Collection<? extends T>> collections) {
 		return collections.stream().flatMap(Collection::stream).collect(Collectors.toList());
 	}

@@ -1,11 +1,15 @@
 package com.antibas.util.list;
 
 
+import lombok.Getter;
+
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Function;
 
+@Getter
 public class ConditionArrayList<T> extends ArrayList<T> {
 	@Serial
 	private static final long serialVersionUID = -5303022406052170453L;
@@ -41,21 +45,16 @@ public class ConditionArrayList<T> extends ArrayList<T> {
 	}
 	
 	private boolean removeIfNotCondition() {
-		boolean removed = false;
-		for(int i = 0; i < this.size(); i++) {
-			if(!this.condition.apply(this.get(i))) {
-				this.remove(i);
-				removed = true;
-			}
+		try {
+			List<T> oldList = this.stream().filter(t -> !this.condition.apply(t)).toList();
+			oldList.forEach(this::remove);
+			return oldList.size() != this.size();
+		} catch (Exception e) {
+            return false;
 		}
-		return removed;
 	}
 
-	public Function<T, Boolean> getCondition() {
-		return condition;
-	}
-
-	@Override
+    @Override
 	public T set(int index, T element) {
 		if(!condition.apply(element)) {
 			return null;

@@ -25,6 +25,10 @@ public class DirectedEdge extends Edge {
 		this(name, cost, Direction.TO);
 	}
 
+	public DirectedEdge(String name, Direction direction) {
+		this(name, 0, direction);
+	}
+
 	public DirectedEdge(String name) {
 		this(name, 0, Direction.TO);
 	}

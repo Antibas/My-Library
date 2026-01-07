@@ -3,12 +3,13 @@ package com.antibas.math;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.SequencedCollection;
 
 import static com.antibas.math.Math2.RNG;
 import static com.antibas.math.Math2.fac;
 
 public final class Combinations {
-    public static <T> List<List<T>> product(List<T> col, int n) {
+    public static <T> List<List<T>> product(Collection<T> col, int n) {
         List<List<T>> result = new ArrayList<>();
         if (n < 0) {
             return result;
@@ -17,7 +18,7 @@ public final class Combinations {
         return result;
     }
 
-    public static <T> List<List<T>> permutations(List<T> col, int n) {
+    public static <T> List<List<T>> permutations(Collection<T> col, int n) {
         List<List<T>> result = new ArrayList<>();
         if (n < 0 || n > col.size()) {
             return result;
@@ -25,7 +26,7 @@ public final class Combinations {
         return backtrack(col, n, new ArrayList<>(), new boolean[col.size()], result);
     }
 
-    public static <T> List<List<T>> combinations(List<T> col, int n) {
+    public static <T> List<List<T>> combinations(Collection<T> col, int n) {
         List<List<T>> result = new ArrayList<>();
         if (n < 0 || n > col.size()) {
             return result;
@@ -34,7 +35,7 @@ public final class Combinations {
     }
 
     private static <T> List<List<T>> backtrack(
-            List<T> col,
+            Collection<T> col,
             int n,
             int start,
             List<T> current,
@@ -46,7 +47,7 @@ public final class Combinations {
         }
 
         for (int i = start; i < col.size(); i++) {
-            current.add(col.get(i));
+            current.add(col.stream().toList().get(i));
             backtrack(col, n, i + 1, current, result);
             current.removeLast();
         }
@@ -54,7 +55,7 @@ public final class Combinations {
     }
 
     private static <T> List<List<T>> backtrack(
-            List<T> col,
+            Collection<T> col,
             int n,
             List<T> current,
             boolean[] used,
@@ -69,7 +70,7 @@ public final class Combinations {
             if (used[i]) continue;
 
             used[i] = true;
-            current.add(col.get(i));
+            current.add(col.stream().toList().get(i));
 
             backtrack(col, n, current, used, result);
 
@@ -80,7 +81,7 @@ public final class Combinations {
     }
 
     private static <T> void backtrack(
-            List<T> col,
+            Collection<T> col,
             int n,
             List<T> current,
             List<List<T>> result) {

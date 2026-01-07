@@ -129,6 +129,26 @@ public class MatrixGraph<V extends Vertex, E extends Edge> implements Graph<V, E
 	}
 
 	@Override
+	public V putEdge(String vertex1, String vertex2, E edge) {
+		return null;
+	}
+
+	@Override
+	public V putEdge(String vertex, E edge) {
+		return null;
+	}
+
+	@Override
+	public boolean removeEdge(String vertex, E edge) {
+		return false;
+	}
+
+	@Override
+	public boolean removeEdge(String edge) {
+		return false;
+	}
+
+	@Override
 	public E getEdge(E edge) {
 		// TODO Auto-generated method stub
 		return null;

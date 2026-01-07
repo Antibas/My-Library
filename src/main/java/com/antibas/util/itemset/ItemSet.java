@@ -3,10 +3,7 @@ package com.antibas.util.itemset;
 import com.antibas.util.ArrayUtils;
 
 import java.io.Serial;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 public class ItemSet extends HashSet<Item>{
 
@@ -37,13 +34,14 @@ public class ItemSet extends HashSet<Item>{
 	}
 
 	public Item getMaxValueItem() {
-		Item m = new Item();
-		for(Item i: this) {
-			if(m.getValue() < i.getValue()) {
-				m = i;
-			}
-		}
-		return m;
+//		Item m = new Item();
+//		for(Item i: this) {
+//			if(m.getValue() < i.getValue()) {
+//				m = i;
+//			}
+//		}
+//		return m;
+		return this.stream().max(Comparator.comparingDouble(Item::getValue)).orElse(null);
 	}
 	
 	public HashMap<Item, Double> fractionalKnapsack(double weight) {

@@ -86,24 +86,24 @@ public final class Complex extends Number2 implements Comparable<Complex>{
 	}
 	
 	@Override
-	public Complex subtract(Number2 o) {
+	public <T extends Number2>Complex subtract(T o) {
 		if(o.complexValue() == null) {
 			return this.subtract(o.doubleValue());
 		}
 		return this.subtract(o.complexValue());
 	}
 
-	public Complex multiply(double d) {
+	public <T extends Number2>Complex multiply(double d) {
 		return new Complex(real * d, imaginary * d);
 	}
 	
-	public Complex multiply(Complex com) {
+	public <T extends Number2>Complex multiply(Complex com) {
 		double a = real, b = imaginary, c = com.real, d = com.imaginary;
 		return new Complex(a*c - b*d, a*d + b*c);
 	}
 	
 	@Override
-	public Complex multiply(Number2 o) {
+	public <T extends Number2>Complex multiply(T o) {
 		if(o.complexValue() == null) {
 			return this.multiply(o.doubleValue());
 		}
@@ -126,7 +126,7 @@ public final class Complex extends Number2 implements Comparable<Complex>{
 	}
 	
 	@Override
-	public Complex divide(Number2 o) throws ArithmeticException {
+	public <T extends Number2> Complex divide(T o) throws ArithmeticException {
 		if(o.complexValue() == null) {
 			return this.divide(o.doubleValue());
 		}
@@ -170,10 +170,10 @@ public final class Complex extends Number2 implements Comparable<Complex>{
 
 	@Override
 	public int compareTo(Complex o) {
-		int c = Double.compare((real), o.real) + Double.compare((imaginary), o.imaginary);
-		if(c == 2) return 1;
-		if(c == -2) return -1;
-		return c;
+//		int c = Double.compare((real), o.real) + Double.compare((imaginary), o.imaginary);
+//		if(c == 2) return 1;
+//		if(c == -2) return -1;
+		return (int) Math.signum(Double.compare((real), o.real) + Double.compare((imaginary), o.imaginary));
 	}
 
 	@Override
@@ -202,22 +202,22 @@ public final class Complex extends Number2 implements Comparable<Complex>{
 	}
 
 	@Override
-	public boolean greaterThan(Number2 o) {
+	public <T extends Number2>  boolean greaterThan(T o) {
 		return this.real > o.complexValue().real && this.imaginary > o.complexValue().imaginary;
 	}
 
 	@Override
-	public boolean greaterThanOrEqual(Number2 o) {
+	public <T extends Number2>  boolean greaterThanOrEqual(T o) {
 		return this.real >= o.complexValue().real && this.imaginary >= o.complexValue().imaginary;
 	}
 
 	@Override
-	public boolean lessThan(Number2 o) {
+	public <T extends Number2>  boolean lessThan(T o) {
 		return this.real < o.complexValue().real && this.imaginary < o.complexValue().imaginary;
 	}
 
 	@Override
-	public boolean lessThanOrEqual(Number2 o) {
+	public <T extends Number2> boolean lessThanOrEqual(T o) {
 		return this.real <= o.complexValue().real && this.imaginary <= o.complexValue().imaginary;
 	}
 
@@ -239,7 +239,7 @@ public final class Complex extends Number2 implements Comparable<Complex>{
 	}
 	
 	@Override
-	public boolean notEquals(Number2 o) {
+	public <T extends Number2> boolean notEquals(T o) {
 		return !this.equals(o);
 	}
 
