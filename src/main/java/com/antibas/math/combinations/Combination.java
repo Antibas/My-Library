@@ -1,45 +1,43 @@
-package com.antibas.math;
+package com.antibas.math.combinations;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.SequencedCollection;
 
 import static com.antibas.math.Math2.RNG;
 import static com.antibas.math.Math2.fac;
 
-public final class Combinations {
-    public static <T> List<List<T>> product(Collection<T> col, int n) {
-        List<List<T>> result = new ArrayList<>();
-        if (n < 0) {
-            return result;
-        }
-        backtrack(col, n, new ArrayList<>(), result);
-        return result;
+public class Combination<T> extends ArrayList<List<T>> {
+
+    public Combination(int initialCapacity) {
+        super(initialCapacity);
     }
 
-    public static <T> List<List<T>> permutations(Collection<T> col, int n) {
-        List<List<T>> result = new ArrayList<>();
-        if (n < 0 || n > col.size()) {
-            return result;
-        }
-        return backtrack(col, n, new ArrayList<>(), new boolean[col.size()], result);
+    public Combination() {
     }
 
-    public static <T> List<List<T>> combinations(Collection<T> col, int n) {
-        List<List<T>> result = new ArrayList<>();
+    public Combination(Collection<? extends List<T>> c) {
+        super(c);
+    }
+
+    public Combination(Collection<T> c, int n) {
+        super(combinations(c, n).stream().toList());
+    }
+
+    public static <T> Combination<T> combinations(Collection<T> col, int n) {
+        Combination<T> result = new Combination<>();
         if (n < 0 || n > col.size()) {
             return result;
         }
         return backtrack(col, n, 0, new ArrayList<>(), result);
     }
 
-    private static <T> List<List<T>> backtrack(
+    private static <T> Combination<T> backtrack(
             Collection<T> col,
             int n,
             int start,
             List<T> current,
-            List<List<T>> result) {
+            Combination<T> result) {
 
         if (current.size() == n) {
             result.add(new ArrayList<>(current));
@@ -54,49 +52,6 @@ public final class Combinations {
         return result;
     }
 
-    private static <T> List<List<T>> backtrack(
-            Collection<T> col,
-            int n,
-            List<T> current,
-            boolean[] used,
-            List<List<T>> result) {
-
-        if (current.size() == n) {
-            result.add(new ArrayList<>(current));
-            return result;
-        }
-
-        for (int i = 0; i < col.size(); i++) {
-            if (used[i]) continue;
-
-            used[i] = true;
-            current.add(col.stream().toList().get(i));
-
-            backtrack(col, n, current, used, result);
-
-            current.removeLast();
-            used[i] = false;
-        }
-        return result;
-    }
-
-    private static <T> void backtrack(
-            Collection<T> col,
-            int n,
-            List<T> current,
-            List<List<T>> result) {
-
-        if (current.size() == n) {
-            result.add(new ArrayList<>(current));
-            return;
-        }
-
-        for (T element : col) {
-            current.add(element);
-            backtrack(col, n, current, result);
-            current.removeLast();
-        }
-    }
 
     /**
      * Returns the number of ordered arrangements of k objects taken from n unlike objects

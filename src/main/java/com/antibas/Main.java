@@ -1,9 +1,8 @@
 package com.antibas;
-import com.antibas.math.Combinations;
-import com.antibas.math.Math2;
-import com.antibas.util.json.Json;
+import com.antibas.math.combinations.Combination;
+import com.antibas.math.combinations.Permutation;
+import com.antibas.math.combinations.Product;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -34,9 +33,9 @@ public class Main {
 //                js: {a: "string"; number: 567; bool: true}
 //                """));
 
-        System.out.println(Combinations.combinations(List.of(0, 1, 2), 2));
-        System.out.println(Combinations.permutations(List.of(0, 1, 2), 2));
-        System.out.println(Combinations.product(List.of(0, 1, 2), 2));
+        System.out.println(Combination.combinations(List.of(0, 1, 2), 2));
+        System.out.println(Permutation.permutations(List.of(0, 1, 2), 2));
+        System.out.println(Product.product(List.of(0, 1, 2), 2));
 		  /*
 		  Graph<Vertex, Edge> G = new Graph<>();
 		  Vertex A = new Vertex("A");

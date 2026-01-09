@@ -1,9 +1,10 @@
 package com.antibas.games.foureqten;
 
-import com.antibas.math.Combinations;
+import com.antibas.math.combinations.Combination;
 import com.antibas.math.Math2;
+import com.antibas.math.combinations.Permutation;
+import com.antibas.math.combinations.Product;
 
-import javax.script.ScriptException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,8 +15,8 @@ public class FourEqTen {
     public final static List<Character> operations = List.of('+', '-', '*', '/');
 
     public static Set<String> getSolutions(List<Integer> numbers, int goal) {
-        List<List<Integer>> numberPerms = Combinations.permutations(numbers, N);
-        List<List<Character>> operationPerms = Combinations.product(operations, N-1);
+        Permutation<Integer> numberPerms = new Permutation<>(numbers, N);
+        Product<Character> operationPerms = new Product<>(operations, N-1);
         Set<String> solutions = new HashSet<>();
         String sol;
         for(List<Integer> nums: numberPerms)

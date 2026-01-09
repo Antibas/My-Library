@@ -5,7 +5,7 @@
  */
 package com.antibas.util.list;
 
-import com.antibas.math.Combinations;
+import com.antibas.math.combinations.Combination;
 import com.antibas.math.Math2;
 import com.antibas.util.ArrayUtils;
 import com.antibas.util.Methods;
@@ -123,7 +123,7 @@ public class RandomArrayList<E> extends ArrayListIndexConvertor<E> {
 			public E next() {
 				int index;
 				do{
-					index = Combinations.choice(indexSet);
+					index = Combination.choice(indexSet);
 				} while(indices[index]);
 				indices[index] = true;
 				return RandomArrayList.this.get(index);
